@@ -35,6 +35,9 @@ public class Keyboard implements KeyListener {
         if(c == '5') handler.handle(10, window);
         if(c == '6') handler.handle(11, window);
         if(c == 'p') handler.handle(12, window);
+        if(c == 't') handler.handle(13, window);
+        if(c == 'r') handler.handle(14, window);
+        if(c == 'k') handler.handle(15, window);
     }
 
     @Override

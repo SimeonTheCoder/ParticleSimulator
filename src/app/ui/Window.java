@@ -2,6 +2,7 @@ package app.ui;
 
 import app.core.simulation.Simulation;
 import app.core.simulation.particles.Particle;
+import app.core.simulation.threads.SimulationThread;
 import app.math.Vec2;
 import app.rendering.Renderer;
 import app.ui.sensors.KeyHandler;
@@ -9,6 +10,7 @@ import app.ui.sensors.Keyboard;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.concurrent.TimeUnit;
 
 public class Window extends JPanel {
     private JFrame frame;
@@ -18,7 +20,8 @@ public class Window extends JPanel {
     public int ITERATIONS;
 
     public Vec2 selector;
-    public static boolean PAUSED;
+    public boolean PAUSED;
+    public boolean THREADED;
 
     public Window(String title, int xSize, int ySize, Renderer renderer) {
         frame = new JFrame(title);
@@ -38,15 +41,22 @@ public class Window extends JPanel {
         frame.addKeyListener(new Keyboard(new KeyHandler(), this));
 
         PAUSED = false;
+        THREADED = false;
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
 
+        long millis1 = System.currentTimeMillis();
+
         if(!PAUSED) {
             for (int i = 0; i < ITERATIONS; i++) {
-                simulation.step();
+                if(!THREADED) {
+                    simulation.step();
+                }else{
+                    simulation.threadedStep();
+                }
             }
         }
 
@@ -61,5 +71,20 @@ public class Window extends JPanel {
             g.setColor(Color.BLUE);
             g.drawString("Paused", 20, 20);
         }
+
+        if(THREADED) {
+            g.setColor(Color.BLUE);
+            g.drawString("Threaded", 20, 60);
+        }
+
+        if(SimulationThread.DIS_CHECK) {
+            g.setColor(Color.PINK);
+            g.drawString("CHECK", 20, 80);
+        }
+
+        long millis2 = System.currentTimeMillis();
+
+        g.setColor(Color.BLUE);
+        g.drawString(String.valueOf(1 / ((millis2 - millis1) + .0) * 1000), 20, 40);
     }
 }

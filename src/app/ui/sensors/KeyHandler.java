@@ -1,6 +1,7 @@
 package app.ui.sensors;
 
 import app.core.simulation.particles.Particle;
+import app.core.simulation.threads.SimulationThread;
 import app.math.Vec2;
 import app.ui.Window;
 
@@ -167,6 +168,24 @@ public class KeyHandler {
 
             case 12: {
                 window.PAUSED = !window.PAUSED;
+
+                break;
+            }
+
+            case 13 : {
+                window.THREADED = !window.THREADED;
+
+                break;
+            }
+
+            case 14 : {
+                Vec2.FAST_ROOT = !Vec2.FAST_ROOT;
+
+                break;
+            }
+
+            case 15: {
+                SimulationThread.DIS_CHECK = !SimulationThread.DIS_CHECK;
 
                 break;
             }

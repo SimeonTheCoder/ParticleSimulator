@@ -1,36 +1,33 @@
-package app.core.simulation;
+package app.core.simulation.threads;
 
 import app.core.simulation.particles.Particle;
-import app.core.simulation.threads.SimulationThread;
 import app.math.Vec2;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Simulation {
-    public List<Particle> particles;
+public class SimulationThread extends Thread{
+    public static List<Particle> particles;
     public List<Vec2> globalForces;
-    public List<SimulationThread> threads;
-    public int THREAD_COUNT = 4;
 
-    public Simulation(List<Particle> particles) {
-        this.particles = particles;
+    public int threadIndex;
+    public double THREAD_COUNT = 4.;
+
+    public static boolean DIS_CHECK = false;
+
+    public SimulationThread(int threadIndex, List<Particle> particles, List<Vec2> globalForces) {
+        SimulationThread.particles = particles;
+        this.globalForces = globalForces;
+
+        this.threadIndex = threadIndex;
     }
 
-    public Simulation() {
-        particles = new ArrayList<>();
-        globalForces = new ArrayList<>();
+    @Override
+    public synchronized void start() {
+        for (int pIndex = (int) (threadIndex / THREAD_COUNT * particles.size()); pIndex < (int) ((threadIndex + 1) / THREAD_COUNT * particles.size()); pIndex ++) {
+            if (pIndex < 0 || pIndex >= particles.size()) continue;
 
-        threads = new ArrayList<>();
+            Particle particle = particles.get(pIndex);
 
-        for(int i = 0; i < THREAD_COUNT; i ++) {
-            threads.add(new SimulationThread(i, particles, globalForces));
-            threads.get(i).THREAD_COUNT = THREAD_COUNT;
-        }
-    }
-
-    public void step() {
-        for (Particle particle : particles) {
             if(!particle.active) continue;
 
             if(particle.pos.x < 0) {
@@ -39,7 +36,6 @@ public class Simulation {
             }
 
             if(particle.pos.x > 1000) {
-//                particle.active = false;
                 particle.pos.x = 1000;
                 particle.vel.x *= -1 * particle.fric;
             }
@@ -67,7 +63,7 @@ public class Simulation {
             for (Particle currParticle : particles) {
                 if (currParticle == particle || currParticle.group == 4) continue;
 
-                if (SimulationThread.DIS_CHECK && (Math.abs(currParticle.pos.x - particle.pos.x) > 70 || Math.abs(currParticle.pos.y - particle.pos.y) > 70)) {
+                if (DIS_CHECK && (Math.abs(currParticle.pos.x - particle.pos.x) > 70 || Math.abs(currParticle.pos.y - particle.pos.y) > 70)) {
                     continue;
                 }
 
@@ -91,12 +87,8 @@ public class Simulation {
                     currParticle.vel.add(dvec);
                 }
             }
-        }
-    }
 
-    public void threadedStep() {
-        for(int i = 0; i < THREAD_COUNT; i ++) {
-            threads.get(i).start();
+            stop();
         }
     }
 }

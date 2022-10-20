@@ -33,8 +33,8 @@ public class Renderer {
 
             g.fillRect((int) particle.pos.x, (int) particle.pos.y, 5, 5);
 
-            g.drawLine((int) particle.pos.x, (int) particle.pos.y,
-                    (int) (particle.pos.x + particle.vel.x * 3), (int) (particle.pos.y + particle.vel.y * 3));
+//            g.drawLine((int) particle.pos.x, (int) particle.pos.y,
+//                    (int) (particle.pos.x + particle.vel.x * 3), (int) (particle.pos.y + particle.vel.y * 3));
         }
 
 //        for (Particle particle : simulation.particles) {
