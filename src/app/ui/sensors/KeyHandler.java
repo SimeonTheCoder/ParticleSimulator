@@ -164,6 +164,12 @@ public class KeyHandler {
 
                 break;
             }
+
+            case 12: {
+                window.PAUSED = !window.PAUSED;
+
+                break;
+            }
         }
     }
 }

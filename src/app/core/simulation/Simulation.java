@@ -50,7 +50,7 @@ public class Simulation {
                 }
             }
 
-            particle.cap(10);
+            particle.cap(5);
 
             particle.pos.add(particle.vel);
 

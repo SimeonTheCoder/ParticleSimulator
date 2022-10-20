@@ -18,6 +18,7 @@ public class Window extends JPanel {
     public int ITERATIONS;
 
     public Vec2 selector;
+    public static boolean PAUSED;
 
     public Window(String title, int xSize, int ySize, Renderer renderer) {
         frame = new JFrame(title);
@@ -35,14 +36,18 @@ public class Window extends JPanel {
         selector = new Vec2(0, 0);
 
         frame.addKeyListener(new Keyboard(new KeyHandler(), this));
+
+        PAUSED = false;
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
 
-        for(int i = 0; i < ITERATIONS; i ++) {
-            simulation.step();
+        if(!PAUSED) {
+            for (int i = 0; i < ITERATIONS; i++) {
+                simulation.step();
+            }
         }
 
         renderer.render((Graphics2D) g, simulation);
@@ -51,5 +56,10 @@ public class Window extends JPanel {
         g.fillRect((int) selector.x, (int) selector.y, 10, 10);
 
         repaint();
+
+        if(PAUSED) {
+            g.setColor(Color.BLUE);
+            g.drawString("Paused", 20, 20);
+        }
     }
 }
