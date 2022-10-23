@@ -11,6 +11,7 @@ public class Particle {
     public boolean grav;
     public boolean active;
     public double mass;
+    public double speedCap;
 
     public double fric;
     public int group;
@@ -23,16 +24,17 @@ public class Particle {
         this.pos = pos;
         this.vel = vel;
         this.mass = mass;
+        this.speedCap = 5;
 
         this.active = true;
     }
 
     public static Particle build(Vec2 pos, Vec2 vel, double mass) {
-        return new Particle(pos, vel, mass);
+        return new Particle(pos, vel, mass).setCap(5);
     }
 
     public static Particle build() {
-        return new Particle().setMass(1);
+        return new Particle().setCap(5).setMass(1);
     }
 
     public Particle(Vec2 pos, Vec2 vel, Vec2 att, Vec2 rep, Vec2 aff, boolean grav, double mass, double fric) {
@@ -46,16 +48,12 @@ public class Particle {
         this.fric = fric;
     }
 
-    public void addForce(Vec2 force) {
-        vel.add(force);
-    }
-
-    public void cap(double val) {
+    public void cap() {
         if(vel.length() == 0) return;
 
         double mag = vel.length();
 
-        mag = Math.min(mag, val);
+        mag = Math.min(mag, speedCap);
 
         vel.normalize();
         vel.mul(mag);
@@ -147,6 +145,16 @@ public class Particle {
 
     public Particle setGroup(int group) {
         this.group = group;
+
+        return this;
+    }
+
+    public double getCap() {
+        return speedCap;
+    }
+
+    public Particle setCap(double speedCap) {
+        this.speedCap = speedCap;
 
         return this;
     }

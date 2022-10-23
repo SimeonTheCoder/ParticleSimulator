@@ -11,11 +11,13 @@ public class Simulation {
     public List<Particle> particles;
     public List<Vec2> globalForces;
     public List<SimulationThread> threads;
-    public int THREAD_COUNT = 4;
+    public int THREAD_COUNT = 8;
 
     public Simulation(List<Particle> particles) {
         this.particles = particles;
     }
+
+    public static boolean[] finished;
 
     public Simulation() {
         particles = new ArrayList<>();
@@ -23,13 +25,22 @@ public class Simulation {
 
         threads = new ArrayList<>();
 
+        SimulationThread.paused = true;
+
+        finished = new boolean[THREAD_COUNT];
+
         for(int i = 0; i < THREAD_COUNT; i ++) {
+            finished[i] = false;
+
             threads.add(new SimulationThread(i, particles, globalForces));
             threads.get(i).THREAD_COUNT = THREAD_COUNT;
+            threads.get(i).start();
         }
     }
 
     public void step() {
+        SimulationThread.paused = true;
+
         for (Particle particle : particles) {
             if(!particle.active) continue;
 
@@ -53,16 +64,6 @@ public class Simulation {
                 particle.pos.y = 500;
                 particle.vel.y *= -1 * particle.fric;
             }
-
-            if(particle.grav) {
-                for (Vec2 globalForce : globalForces) {
-                    particle.vel.add(globalForce);
-                }
-            }
-
-            particle.cap(5);
-
-            particle.pos.add(particle.vel);
 
             for (Particle currParticle : particles) {
                 if (currParticle == particle || currParticle.group == 4) continue;
@@ -91,12 +92,22 @@ public class Simulation {
                     currParticle.vel.add(dvec);
                 }
             }
+
+            particle.cap();
+
+            if(particle.grav) {
+                for (Vec2 globalForce : globalForces) {
+                    particle.vel.add(globalForce);
+                }
+            }
+
+            particle.pos.add(particle.vel);
         }
     }
 
     public void threadedStep() {
-        for(int i = 0; i < THREAD_COUNT; i ++) {
-            threads.get(i).start();
-        }
+        SimulationThread.paused = false;
+
+        System.out.println(Simulation.finished[0]);
     }
 }
