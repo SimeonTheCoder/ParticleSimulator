@@ -42,6 +42,8 @@ public class SimulationThread extends Thread{
 
                     Particle particle = particles.get(pIndex);
 
+                    particle.closestDistance = 30;
+
                     if (!particle.active) continue;
 
                     if (particle.pos.x < 0) {
@@ -76,6 +78,10 @@ public class SimulationThread extends Thread{
 
                         double dis = dvec.length();
 
+                        if(!((Double) dis).isNaN()) {
+                            particle.closestDistance = Math.max(5, Math.min(particle.closestDistance, dis));
+                        }
+
                         dvec.normalize();
 
                         dis = Math.max(dis, 1);
@@ -104,8 +110,6 @@ public class SimulationThread extends Thread{
                 }
 
                 Simulation.finished[threadIndex] = true;
-
-                System.out.println(Simulation.finished[threadIndex]);
             }
         }
     }

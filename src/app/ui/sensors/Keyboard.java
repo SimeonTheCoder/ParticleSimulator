@@ -1,5 +1,6 @@
 package app.ui.sensors;
 
+import app.rendering.Renderer;
 import app.ui.Window;
 
 import java.awt.event.KeyEvent;
@@ -38,6 +39,8 @@ public class Keyboard implements KeyListener {
         if(c == 't') handler.handle(13, window);
         if(c == 'r') handler.handle(14, window);
         if(c == 'k') handler.handle(15, window);
+
+        if(c == 'b') Renderer.DEBUG = !Renderer.DEBUG;
     }
 
     @Override

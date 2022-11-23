@@ -4,9 +4,6 @@ import app.core.simulation.Simulation;
 import app.core.simulation.particles.Particle;
 
 import java.awt.*;
-import java.awt.geom.Area;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Renderer {
     public int[][] values;
@@ -14,6 +11,8 @@ public class Renderer {
     public Renderer() {
         values = new int[1000][1000];
     }
+
+    public static boolean DEBUG = true;
 
     public void render(Graphics2D g, Simulation simulation) {
         for (Particle particle : simulation.particles) {
@@ -25,13 +24,23 @@ public class Renderer {
                 g.setColor(new Color(0, 255, 0));
             }else if(particle.group == 3) {
                 g.setColor(new Color(0, 0, 255));
+
+//                continue;
             }else if(particle.group == 4) {
                 g.setColor(new Color(0, 0, 0));
             }else if(particle.group == 5) {
                 g.setColor(Color.DARK_GRAY);
             }
 
-            g.fillRect((int) particle.pos.x, (int) particle.pos.y, 5, 5);
+            if(particle.group != 4) {
+                int closestDistance = Math.max(5, (int) (30 - particle.closestDistance));
+
+                g.fillOval((int) particle.pos.x - closestDistance,
+                        (int) particle.pos.y - closestDistance,
+                        closestDistance, closestDistance);
+            }else{
+                g.fillRect((int) particle.pos.x, (int) particle.pos.y, 5, 5);
+            }
 
 //            g.drawLine((int) particle.pos.x, (int) particle.pos.y,
 //                    (int) (particle.pos.x + particle.vel.x * 3), (int) (particle.pos.y + particle.vel.y * 3));

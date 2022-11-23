@@ -16,8 +16,12 @@ public class Particle {
     public double fric;
     public int group;
 
+    public double closestDistance;
+
     public Particle() {
         this.active = true;
+
+        closestDistance = 100;
     }
 
     public Particle(Vec2 pos, Vec2 vel, double mass) {
@@ -27,6 +31,8 @@ public class Particle {
         this.speedCap = 5;
 
         this.active = true;
+
+        closestDistance = 100;
     }
 
     public static Particle build(Vec2 pos, Vec2 vel, double mass) {
@@ -46,6 +52,8 @@ public class Particle {
         this.grav = grav;
         this.mass = mass;
         this.fric = fric;
+
+        closestDistance = 100;
     }
 
     public void cap() {

@@ -45,7 +45,7 @@ public class KeyHandler {
                                     .setAtt(new Vec2(100, 1))
                                     .setRep(new Vec2(50, 1))
                                     .setGrav(true)
-                                    .setMass(1)
+                                    .setMass(10)
                                     .setFric(.5)
                                     .setCap(1)
                     );
@@ -82,7 +82,7 @@ public class KeyHandler {
                                     .setAtt(new Vec2(100, .1))
                                     .setRep(new Vec2(50, 10))
                                     .setGrav(true)
-                                    .setMass(1)
+                                    .setMass(.1)
                                     .setFric(.5)
                     );
                 }
@@ -133,19 +133,7 @@ public class KeyHandler {
 
             case 10 : {
                 for(int i = 0; i < 500; i+= 20) {
-//                    window.simulation.particles.add(
-//                            Particle.build()
-//                                    .setVel(new Vec2(0, 0))
-//                                    .setPos(new Vec2(0, i))
-//                                    .setGroup(3)
-//                                    .setAtt(new Vec2(100, .1))
-//                                    .setRep(new Vec2(50, 10))
-//                                    .setGrav(true)
-//                                    .setMass(1)
-//                                    .setFric(.5)
-//                    );
-
-                    window.simulation.particles.add(window.simulation.particles.size() - 1,
+                    window.simulation.particles.add(
                             Particle.build()
                                     .setVel(new Vec2(0, 0))
                                     .setPos(new Vec2(0, i))

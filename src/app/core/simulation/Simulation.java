@@ -3,6 +3,7 @@ package app.core.simulation;
 import app.core.simulation.particles.Particle;
 import app.core.simulation.threads.SimulationThread;
 import app.math.Vec2;
+import app.rendering.Renderer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,8 @@ public class Simulation {
         SimulationThread.paused = true;
 
         for (Particle particle : particles) {
+            particle.closestDistance = 30;
+
             if(!particle.active) continue;
 
             if(particle.pos.x < 0) {
@@ -77,6 +80,10 @@ public class Simulation {
 
                 double dis = dvec.length();
 
+                if(!((Double) dis).isNaN()) {
+                    particle.closestDistance = Math.max(5, Math.min(particle.closestDistance, dis));
+                }
+
                 dvec.normalize();
 
                 dis = Math.max(dis, 1);
@@ -107,7 +114,5 @@ public class Simulation {
 
     public void threadedStep() {
         SimulationThread.paused = false;
-
-        System.out.println(Simulation.finished[0]);
     }
 }
