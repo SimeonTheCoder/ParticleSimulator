@@ -3,7 +3,6 @@ package app.core.simulation;
 import app.core.simulation.particles.Particle;
 import app.core.simulation.threads.SimulationThread;
 import app.math.Vec2;
-import app.rendering.Renderer;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -28,7 +28,7 @@ public class Vec2 {
     }
 
     public void normalize() {
-        double l = length();
+        double l = Math.max(0.1, length());
 
         this.x /= l;
         this.y /= l;

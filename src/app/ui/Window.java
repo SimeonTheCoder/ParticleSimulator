@@ -1,5 +1,6 @@
 package app.ui;
 
+import app.core.Serialize;
 import app.core.simulation.Simulation;
 import app.core.simulation.particles.Particle;
 import app.core.simulation.threads.SimulationThread;
@@ -10,9 +11,12 @@ import app.ui.sensors.Keyboard;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-public class Window extends JPanel {
+public class Window extends JPanel implements AppWindow {
     private JFrame frame;
     private Renderer renderer;
 
@@ -86,5 +90,25 @@ public class Window extends JPanel {
 
         g.setColor(Color.BLUE);
         g.drawString(String.valueOf(1 / ((millis2 - millis1) + .0) * 1000), 20, 40);
+
+        g.setColor(Color.PINK);
+        g.drawString(String.valueOf(simulation.particles.size()), 20, 80);
+    }
+
+    @Override
+    public void setVisible(boolean visible) {
+        this.frame.setVisible(visible);
+    }
+
+    public void save(String name) {
+        Serialize serialize = new Serialize();
+
+        serialize.save(name, simulation);
+    }
+
+    public void load(String name) {
+        Serialize serialize = new Serialize();
+
+        serialize.load(name, simulation);
     }
 }

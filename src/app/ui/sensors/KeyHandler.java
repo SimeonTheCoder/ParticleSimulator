@@ -5,6 +5,8 @@ import app.core.simulation.threads.SimulationThread;
 import app.math.Vec2;
 import app.ui.Window;
 
+import java.util.concurrent.TimeUnit;
+
 public class KeyHandler {
     private static final int MOVEMENT_SPEED = 20;
     private static final int SPAWN_RATE = 5;
@@ -37,6 +39,8 @@ public class KeyHandler {
 
             case 5 : {
                 for(int i = 0; i < SPAWN_RATE; i++) {
+                    window.THREADED = false;
+
                     window.simulation.particles.add(
                             Particle.build()
                                     .setVel(new Vec2(0, 0))
@@ -56,6 +60,8 @@ public class KeyHandler {
 
             case 6 : {
                 for(int i = 0; i < SPAWN_RATE; i++) {
+                    window.THREADED = false;
+
                     window.simulation.particles.add(
                             Particle.build()
                                     .setVel(new Vec2(0, 0))
@@ -74,6 +80,8 @@ public class KeyHandler {
 
             case 7 : {
                 for(int i = 0; i < SPAWN_RATE; i++) {
+                    window.THREADED = false;
+
                     window.simulation.particles.add(
                             Particle.build()
                                     .setVel(new Vec2(0, 0))
@@ -91,6 +99,8 @@ public class KeyHandler {
             }
 
             case 8 : {
+                window.THREADED = false;
+
                 for(int i = -10; i < 10; i+= 5) {
                     for(int j = -10; j < 10; j+= 5) {
                         window.simulation.particles.add(
@@ -132,6 +142,8 @@ public class KeyHandler {
             }
 
             case 10 : {
+                window.THREADED = false;
+
                 for(int i = 0; i < 500; i+= 20) {
                     window.simulation.particles.add(
                             Particle.build()
@@ -150,6 +162,8 @@ public class KeyHandler {
             }
 
             case 11 : {
+                window.THREADED = false;
+
                 for(int i = 0; i < SPAWN_RATE; i++) {
                     window.simulation.particles.add(
                             Particle.build()
