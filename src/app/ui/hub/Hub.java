@@ -1,8 +1,8 @@
 package app.ui.hub;
 
 import app.ui.AppWindow;
-import app.ui.sensors.ActionCode;
-import app.ui.sensors.Actions;
+import app.ui.sensors.actions.ActionCode;
+import app.ui.sensors.actions.Actions;
 
 import javax.swing.*;
 
@@ -27,7 +27,11 @@ public class Hub implements AppWindow {
         JButton simulationButton = new JButton("Simulation");
         simulationButton.addActionListener(new Actions(ActionCode.SIMULATION_WINDOW, this));
 
+        JButton aboutButton = new JButton("About");
+        aboutButton.addActionListener(new Actions(ActionCode.ABOUT_INFO, this));
+
         panel.add(simulationButton);
+        panel.add(aboutButton);
 
         frame.add(panel);
 

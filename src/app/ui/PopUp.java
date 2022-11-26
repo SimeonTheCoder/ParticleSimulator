@@ -1,7 +1,7 @@
 package app.ui;
 
-import app.ui.sensors.ActionCode;
-import app.ui.sensors.Actions;
+import app.ui.sensors.actions.ActionCode;
+import app.ui.sensors.actions.Actions;
 
 import javax.swing.*;
 
@@ -39,7 +39,7 @@ public class PopUp implements AppWindow{
 
         frame.add(panel);
 
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
     }
 

@@ -6,6 +6,7 @@ import app.core.simulation.particles.Particle;
 import app.core.simulation.threads.SimulationThread;
 import app.math.Vec2;
 import app.rendering.Renderer;
+import app.ui.brushes.Brush;
 import app.ui.sensors.KeyHandler;
 import app.ui.sensors.Keyboard;
 import app.ui.sensors.Mouse;
@@ -28,6 +29,9 @@ public class Window extends JPanel implements AppWindow {
     public Vec2 selector;
     public boolean PAUSED;
     public boolean THREADED;
+    public boolean ERASER;
+
+    public Brush brush;
 
     public Window(String title, int xSize, int ySize, Renderer renderer) {
         frame = new JFrame(title);
@@ -51,6 +55,7 @@ public class Window extends JPanel implements AppWindow {
 
         PAUSED = false;
         THREADED = false;
+        ERASER = true;
     }
 
     @Override
@@ -65,15 +70,19 @@ public class Window extends JPanel implements AppWindow {
         selector.x = ((int) (selector.x)) / 20 * 20;
         selector.y = ((int) (selector.y)) / 20 * 20;
 
-        if(Mouse.MOUSE_DOWN) {
-            handler.handle(6, this);
+        if (Mouse.MOUSE_DOWN) {
+            if (!ERASER) {
+                handler.handle(16, this);
+            } else {
+                handler.handle(9, this);
+            }
         }
 
-        if(!PAUSED) {
+        if (!PAUSED) {
             for (int i = 0; i < ITERATIONS; i++) {
-                if(!THREADED) {
+                if (!THREADED) {
                     simulation.step();
-                }else{
+                } else {
                     simulation.threadedStep();
                 }
             }
@@ -86,17 +95,17 @@ public class Window extends JPanel implements AppWindow {
 
         repaint();
 
-        if(PAUSED) {
+        if (PAUSED) {
             g.setColor(Color.BLUE);
             g.drawString("Paused", 20, 20);
         }
 
-        if(THREADED) {
+        if (THREADED) {
             g.setColor(Color.BLUE);
             g.drawString("Threaded", 20, 60);
         }
 
-        if(SimulationThread.DIS_CHECK) {
+        if (SimulationThread.DIS_CHECK) {
             g.setColor(Color.PINK);
             g.drawString("CHECK", 20, 80);
         }
@@ -125,5 +134,9 @@ public class Window extends JPanel implements AppWindow {
         Serialize serialize = new Serialize();
 
         serialize.load(name, simulation);
+    }
+
+    public void setBrush(Brush brush) {
+        this.brush = brush;
     }
 }

@@ -35,14 +35,6 @@ public class Renderer {
                 g.setColor(Color.DARK_GRAY);
             }
 
-            Color color = g.getColor();
-
-            Color copy = new Color((int) Math.max(0, Math.min(255, color.getRed() - particle.pos.y / 3 + particle.vel.length() * 50 - 50)),
-                    (int) Math.max(0, Math.min(255, color.getGreen() - particle.pos.y / 3 + particle.vel.length() * 50 - 50)),
-                    (int) Math.max(0, Math.min(255, color.getBlue() - particle.pos.y / 3 + particle.vel.length() * 50 - 50)));
-
-            g.setColor(copy);
-
             if (particle.group != 4) {
                 int closestDistance = Math.max(5, (int) (30 - particle.closestDistance));
 

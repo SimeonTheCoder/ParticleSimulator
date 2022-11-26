@@ -25,7 +25,11 @@ public class Mouse implements MouseListener {
     public void mousePressed(MouseEvent e) {
         MOUSE_DOWN = true;
 
-        handler.handle(6, window);
+        if (!window.ERASER) {
+            handler.handle(16, window);
+        } else {
+            handler.handle(9, window);
+        }
     }
 
     @Override

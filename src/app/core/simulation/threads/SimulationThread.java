@@ -61,8 +61,8 @@ public class SimulationThread extends Thread{
                         particle.vel.y *= -1 * particle.fric;
                     }
 
-                    if (particle.pos.y > 500) {
-                        particle.pos.y = 500;
+                    if (particle.pos.y > 700) {
+                        particle.pos.y = 700;
                         particle.vel.y *= -1 * particle.fric;
                     }
 

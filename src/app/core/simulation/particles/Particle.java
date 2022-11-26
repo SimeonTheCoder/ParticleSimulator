@@ -166,4 +166,21 @@ public class Particle {
 
         return this;
     }
+
+    public Particle clone() {
+        Particle particle = new Particle();
+
+        particle.setPos(new Vec2(pos.x, pos.y));
+        particle.setVel(new Vec2(vel.x, vel.y));
+        particle.active = this.active;
+        particle.setAtt(new Vec2(att.x, att.y));
+        particle.setRep(new Vec2(rep.x, rep.y));
+        particle.setFric(this.fric);
+        particle.setMass(mass);
+        particle.setGrav(grav);
+        particle.setGroup(group);
+        particle.setCap(speedCap);
+
+        return particle;
+    }
 }
