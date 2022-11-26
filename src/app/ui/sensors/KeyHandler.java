@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 public class KeyHandler {
     private static final int MOVEMENT_SPEED = 20;
-    private static final int SPAWN_RATE = 5;
+    private static final int SPAWN_RATE = 1;
 
     public void handle(int key, Window window) {
         switch (key) {
@@ -46,7 +46,7 @@ public class KeyHandler {
                                     .setVel(new Vec2(0, 0))
                                     .setPos(new Vec2(window.selector.x, window.selector.y))
                                     .setGroup(1)
-                                    .setAtt(new Vec2(100, 1))
+                                    .setAtt(new Vec2(100, 3))
                                     .setRep(new Vec2(50, 1))
                                     .setGrav(true)
                                     .setMass(10)
@@ -92,6 +92,7 @@ public class KeyHandler {
                                     .setGrav(true)
                                     .setMass(.1)
                                     .setFric(.5)
+                                    .setCap(5)
                     );
                 }
 

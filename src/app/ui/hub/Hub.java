@@ -15,6 +15,8 @@ public class Hub implements AppWindow {
         frame.setTitle("SEPience");
         frame.setSize(200, 200);
 
+        frame.setLocation(600, 300);
+
         JPanel panel = new JPanel();
 
         ImageIcon imageIcon = new ImageIcon("ParticleSimulation/assets/brand/sepience_logo_red.png");

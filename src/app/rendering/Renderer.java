@@ -4,41 +4,60 @@ import app.core.simulation.Simulation;
 import app.core.simulation.particles.Particle;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Renderer {
     public int[][] values;
 
     public Renderer() {
         values = new int[1000][1000];
+        random = new Random();
     }
 
     public static boolean DEBUG = true;
+    private Random random;
 
     public void render(Graphics2D g, Simulation simulation) {
         for (Particle particle : simulation.particles) {
-            if(!particle.active) continue;
+            if (!particle.active) continue;
 
-            if(particle.group == 1) {
+            if (particle.group == 1) {
                 g.setColor(new Color(255, 0, 0));
-            }else if(particle.group == 2) {
+            } else if (particle.group == 2) {
                 g.setColor(new Color(0, 255, 0));
-            }else if(particle.group == 3) {
+            } else if (particle.group == 3) {
                 g.setColor(new Color(0, 0, 255));
 
 //                continue;
-            }else if(particle.group == 4) {
+            } else if (particle.group == 4) {
                 g.setColor(new Color(0, 0, 0));
-            }else if(particle.group == 5) {
+            } else if (particle.group == 5) {
                 g.setColor(Color.DARK_GRAY);
             }
 
-            if(particle.group != 4) {
+            Color color = g.getColor();
+
+            Color copy = new Color((int) Math.max(0, Math.min(255, color.getRed() - particle.pos.y / 3 + particle.vel.length() * 50 - 50)),
+                    (int) Math.max(0, Math.min(255, color.getGreen() - particle.pos.y / 3 + particle.vel.length() * 50 - 50)),
+                    (int) Math.max(0, Math.min(255, color.getBlue() - particle.pos.y / 3 + particle.vel.length() * 50 - 50)));
+
+            g.setColor(copy);
+
+            if (particle.group != 4) {
                 int closestDistance = Math.max(5, (int) (30 - particle.closestDistance));
 
                 g.fillOval((int) particle.pos.x - closestDistance,
                         (int) particle.pos.y - closestDistance,
                         closestDistance, closestDistance);
-            }else{
+
+                if(particle.group != 3) {
+                    for (int i = 0; i < Math.min(5, particle.vel.length()); i++) {
+                        g.fillOval((int) ((int) particle.pos.x - closestDistance - particle.vel.x * i),
+                                (int) ((int) particle.pos.y - closestDistance - particle.vel.y * i),
+                                closestDistance, closestDistance);
+                    }
+                }
+            } else {
                 g.fillRect((int) particle.pos.x, (int) particle.pos.y, 5, 5);
             }
 

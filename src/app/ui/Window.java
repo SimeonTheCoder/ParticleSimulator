@@ -8,6 +8,7 @@ import app.math.Vec2;
 import app.rendering.Renderer;
 import app.ui.sensors.KeyHandler;
 import app.ui.sensors.Keyboard;
+import app.ui.sensors.Mouse;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 public class Window extends JPanel implements AppWindow {
     private JFrame frame;
     private Renderer renderer;
+    private KeyHandler handler;
 
     public Simulation simulation;
     public int ITERATIONS;
@@ -42,7 +44,10 @@ public class Window extends JPanel implements AppWindow {
 
         selector = new Vec2(0, 0);
 
-        frame.addKeyListener(new Keyboard(new KeyHandler(), this));
+        handler = new KeyHandler();
+
+        frame.addKeyListener(new Keyboard(handler, this));
+        frame.addMouseListener(new Mouse(handler, this));
 
         PAUSED = false;
         THREADED = false;
@@ -53,6 +58,16 @@ public class Window extends JPanel implements AppWindow {
         super.paint(g);
 
         long millis1 = System.currentTimeMillis();
+
+        selector.x = MouseInfo.getPointerInfo().getLocation().x - 10;
+        selector.y = MouseInfo.getPointerInfo().getLocation().y - 30;
+
+        selector.x = ((int) (selector.x)) / 20 * 20;
+        selector.y = ((int) (selector.y)) / 20 * 20;
+
+        if(Mouse.MOUSE_DOWN) {
+            handler.handle(6, this);
+        }
 
         if(!PAUSED) {
             for (int i = 0; i < ITERATIONS; i++) {
