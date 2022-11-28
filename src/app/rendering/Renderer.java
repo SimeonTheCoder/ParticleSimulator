@@ -18,6 +18,9 @@ public class Renderer {
     private Random random;
 
     public void render(Graphics2D g, Simulation simulation) {
+        g.setColor(new Color(32, 32, 32));
+        g.fillRect(0, 0, 1920, 1080);
+
         for (Particle particle : simulation.particles) {
             if (!particle.active) continue;
 
@@ -30,7 +33,7 @@ public class Renderer {
 
 //                continue;
             } else if (particle.group == 4) {
-                g.setColor(new Color(0, 0, 0));
+                g.setColor(new Color(255, 255, 255));
             } else if (particle.group == 5) {
                 g.setColor(Color.DARK_GRAY);
             }
@@ -50,7 +53,7 @@ public class Renderer {
                     }
                 }
             } else {
-                g.fillRect((int) particle.pos.x, (int) particle.pos.y, 5, 5);
+                g.fillRect((int) particle.pos.x, (int) particle.pos.y, 10, 10);
             }
 
 //            g.drawLine((int) particle.pos.x, (int) particle.pos.y,

@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Serialize {
@@ -16,17 +18,29 @@ public class Serialize {
 
         StringBuilder builder = new StringBuilder();
 
+        List<Vec2> positions = new ArrayList<>();
+
+        for (Particle particle : simulation.particles) {
+            boolean has = false;
+
+            for (Vec2 position : positions) {
+                if(particle.pos.x == position.x && particle.pos.y == position.y) {has = true; break;}
+            }
+
+            if(has) particle.active = false;
+
+            positions.add(particle.pos);
+        }
+
         for (Particle particle : simulation.particles) {
             if(particle.active) {
-                builder.append(String.format("%.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %s %.3f %d",
+                builder.append(String.format("%.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %s %.3f %d ",
                         particle.pos.x, particle.pos.y,
                         particle.vel.x, particle.vel.y,
                         particle.att.x, particle.att.y,
                         particle.rep.x, particle.rep.y,
                         particle.grav, particle.mass,
                         particle.group));
-
-                builder.append(System.lineSeparator());
             }
         }
 
@@ -62,27 +76,27 @@ public class Serialize {
             throw new RuntimeException(e);
         }
 
-        while(scanner.hasNextLine()) {
-            String line = scanner.nextLine();
+        String line = scanner.nextLine();
 
-            line = line.replace(',', '.');
+        line = line.replace(',', '.');
 
-            String[] content = line.split(" ");
+        String[] content = line.split(" ");
 
-            for (String s : content) {
-                System.out.println(s);
+        for(int i = 0; i < content.length; i += 11) {
+            try {
+                Particle particle = Particle.build()
+                        .setPos(new Vec2(Double.parseDouble(content[0 + i]), Double.parseDouble(content[1 + i])))
+                        .setVel(new Vec2(Double.parseDouble(content[2 + i]), Double.parseDouble(content[3 + i])))
+                        .setAtt(new Vec2(Double.parseDouble(content[4 + i]), Double.parseDouble(content[5 + i])))
+                        .setRep(new Vec2(Double.parseDouble(content[6 + i]), Double.parseDouble(content[7 + i])))
+                        .setGrav(Boolean.parseBoolean(content[8 + i]))
+                        .setMass(Double.parseDouble(content[9 + i]))
+                        .setGroup(Integer.parseInt(content[10 + i]));
+
+                simulation.particles.add(particle);
+            }catch (Exception exception) {
+                exception.printStackTrace();
             }
-
-            Particle particle = Particle.build()
-                    .setPos(new Vec2(Double.parseDouble(content[0]), Double.parseDouble(content[1])))
-                    .setVel(new Vec2(Double.parseDouble(content[2]), Double.parseDouble(content[3])))
-                    .setAtt(new Vec2(Double.parseDouble(content[4]), Double.parseDouble(content[5])))
-                    .setRep(new Vec2(Double.parseDouble(content[6]), Double.parseDouble(content[7])))
-                    .setGrav(Boolean.parseBoolean(content[8]))
-                    .setMass(Double.parseDouble(content[9]))
-                    .setGroup(Integer.parseInt(content[10]));
-
-            simulation.particles.add(particle);
         }
     }
 }

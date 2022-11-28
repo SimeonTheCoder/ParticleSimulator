@@ -216,8 +216,8 @@ public class KeyHandler {
                         );
                     }
                 } else {
-                    for (int i = -10; i < 10; i += 5) {
-                        for (int j = -10; j < 10; j += 5) {
+                    for (int i = -10; i < 10; i += 10) {
+                        for (int j = -10; j < 10; j += 10) {
                             window.simulation.particles.add(
                                     window.brush.action(new Vec2(window.selector.x + i, window.selector.y + j), new Vec2(0, 0))
                             );

@@ -53,6 +53,8 @@ public class Window extends JPanel implements AppWindow {
         frame.addKeyListener(new Keyboard(handler, this));
         frame.addMouseListener(new Mouse(handler, this));
 
+        frame.setResizable(false);
+
         PAUSED = false;
         THREADED = false;
         ERASER = true;

@@ -33,26 +33,48 @@ public class BrushCreation implements AppWindow {
 
         JPanel panel = new JPanel();
 
+        panel.setBackground(new Color(32, 32, 32));
+
         JLabel attractionLabelRadius = new JLabel("Attraction radius:");
         attRadius = new JTextField(10);
+        attractionLabelRadius.setForeground(new Color(255, 255, 255));
+        attRadius.setForeground(new Color(255, 255, 255));
+        attRadius.setBackground(new Color(32, 32, 32));
 
         JLabel attractionLabelStrength = new JLabel("Attraction strength:");
         attForce = new JTextField(10);
+        attractionLabelStrength.setForeground(new Color(255, 255, 255));
+        attForce.setForeground(new Color(255, 255, 255));
+        attForce.setBackground(new Color(32, 32, 32));
 
         JLabel repulsionLabelRadius = new JLabel("Repulsion radius:");
         repRadius = new JTextField(10);
+        repulsionLabelRadius.setForeground(new Color(255, 255, 255));
+        repRadius.setForeground(new Color(255, 255, 255));
+        repRadius.setBackground(new Color(32, 32, 32));
 
         JLabel repulsionLabelStrength = new JLabel("Repulsion strength:");
         repForce = new JTextField(10);
+        repulsionLabelStrength.setForeground(new Color(255, 255, 255));
+        repForce.setForeground(new Color(255, 255, 255));
+        repForce.setBackground(new Color(32, 32, 32));
 
         JLabel gravityLabel = new JLabel("Gravity");
         gravity = new JCheckBox();
+        gravityLabel.setForeground(new Color(255, 255, 255));
+        gravityLabel.setBackground(new Color(32, 32, 32));
 
         JLabel massLabel = new JLabel("Mass:");
         mass = new JTextField(10);
+        massLabel.setForeground(new Color(255, 255, 255));
+        mass.setForeground(new Color(255, 255, 255));
+        mass.setBackground(new Color(32, 32, 32));
 
         JLabel groupLabel = new JLabel("Group: ");
         group = new JTextField(10);
+        groupLabel.setForeground(new Color(255, 255, 255));
+        group.setForeground(new Color(255, 255, 255));
+        group.setBackground(new Color(32, 32, 32));
 
         panel.add(attractionLabelRadius);
         panel.add(attRadius);
@@ -94,6 +116,18 @@ public class BrushCreation implements AppWindow {
 
         JButton wallPresetButton = new JButton("Wall");
         wallPresetButton.addActionListener(new Actions(ActionCode.PRESET_WALL, this));
+
+        solidPresetButton.setBackground(new Color(32, 32, 32));
+        liquidPresetButton.setBackground(new Color(32, 32, 32));
+
+        solidPresetButton.setForeground(new Color(255, 255, 255));
+        liquidPresetButton.setForeground(new Color(255, 255, 255));
+
+        gasPresetButton.setBackground(new Color(32, 32, 32));
+        wallPresetButton.setBackground(new Color(32, 32, 32));
+
+        gasPresetButton.setForeground(new Color(255, 255, 255));
+        wallPresetButton.setForeground(new Color(255, 255, 255));
 
         panel.add(solidPresetButton);
         panel.add(liquidPresetButton);

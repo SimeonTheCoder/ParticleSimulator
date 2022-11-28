@@ -20,6 +20,11 @@ public class Ui implements AppWindow {
 
         JPanel panel = new JPanel();
 
+        panel.setBackground(new Color(32, 32, 32));
+//        panel.setBackground(new Color(32, 0, 0));
+
+        frame.setResizable(false);
+
         JButton saveButton = new JButton("Save");
         saveButton.addActionListener(new Actions(ActionCode.SIMULATION_SAVE, this));
 
@@ -38,6 +43,12 @@ public class Ui implements AppWindow {
         JButton threadsButton = new JButton("Threads");
         threadsButton.addActionListener(new Actions(ActionCode.CONFG_THREADS, this));
 
+        saveButton.setBackground(new Color(32, 32, 32));
+        loadButton.setBackground(new Color(32, 32, 32));
+
+        saveButton.setForeground(new Color(255, 255, 255));
+        loadButton.setForeground(new Color(255, 255, 255));
+
         panel.add(saveButton);
         panel.add(loadButton);
 
@@ -51,6 +62,12 @@ public class Ui implements AppWindow {
 
 //        panel.add(new JSeparator());
 
+        brushMakeButton.setBackground(new Color(32, 32, 32));
+        eraserButton.setBackground(new Color(32, 32, 32));
+
+        brushMakeButton.setForeground(new Color(255, 255, 255));
+        eraserButton.setForeground(new Color(255, 255, 255));
+
         panel.add(brushMakeButton);
         panel.add(eraserButton);
 
@@ -61,6 +78,12 @@ public class Ui implements AppWindow {
 
         separator2.setPreferredSize(d2);
         panel.add(separator2);
+
+        pauseButton.setBackground(new Color(32, 32, 32));
+        threadsButton.setBackground(new Color(32, 32, 32));
+
+        pauseButton.setForeground(new Color(255, 255, 255));
+        threadsButton.setForeground(new Color(255, 255, 255));
 
         panel.add(pauseButton);
         panel.add(threadsButton);
