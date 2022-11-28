@@ -20,5 +20,7 @@ public enum ActionCode {
 
     CONFG_THREADS,
 
-    ABOUT_INFO
+    ABOUT_INFO,
+
+    VIEW_PRESSURE
 }

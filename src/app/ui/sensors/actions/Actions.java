@@ -104,6 +104,10 @@ public class Actions implements ActionListener {
                 ((Ui) window).window.PAUSED = !((Ui) window).window.PAUSED;
             }
 
+            case VIEW_PRESSURE -> {
+                ((Ui) window).window.PRESSURE = !((Ui) window).window.PRESSURE;
+            }
+
             case CONFG_THREADS -> {
                 ((Ui) window).window.THREADED = !((Ui) window).window.THREADED;
             }

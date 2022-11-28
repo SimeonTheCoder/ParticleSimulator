@@ -30,6 +30,7 @@ public class Window extends JPanel implements AppWindow {
     public boolean PAUSED;
     public boolean THREADED;
     public boolean ERASER;
+    public boolean PRESSURE;
 
     public Brush brush;
 
@@ -58,6 +59,8 @@ public class Window extends JPanel implements AppWindow {
         PAUSED = false;
         THREADED = false;
         ERASER = true;
+        PRESSURE = false;
+
     }
 
     @Override
@@ -90,7 +93,7 @@ public class Window extends JPanel implements AppWindow {
             }
         }
 
-        renderer.render((Graphics2D) g, simulation);
+        renderer.render((Graphics2D) g, simulation, PRESSURE);
 
         g.setColor(new Color(255, 255, 0));
         g.fillRect((int) selector.x, (int) selector.y, 10, 10);

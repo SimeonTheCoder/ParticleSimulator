@@ -40,6 +40,9 @@ public class Ui implements AppWindow {
         JButton pauseButton = new JButton("Pause");
         pauseButton.addActionListener(new Actions(ActionCode.SIMULATION_PAUSE, this));
 
+        JButton pressureButton = new JButton("Pressure");
+        pressureButton.addActionListener(new Actions(ActionCode.VIEW_PRESSURE, this));
+
         JButton threadsButton = new JButton("Threads");
         threadsButton.addActionListener(new Actions(ActionCode.CONFG_THREADS, this));
 
@@ -86,6 +89,7 @@ public class Ui implements AppWindow {
         threadsButton.setForeground(new Color(255, 255, 255));
 
         panel.add(pauseButton);
+        panel.add(pressureButton);
         panel.add(threadsButton);
 
         frame.add(panel);
