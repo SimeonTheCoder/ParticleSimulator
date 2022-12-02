@@ -7,7 +7,7 @@ public class BasicBrush implements Brush{
     private Particle instance;
 
     @Override
-    public void build(Vec2 att, Vec2 rep, boolean grav, double mass, double fric, int group) {
+    public void build(Vec2 att, Vec2 rep, boolean grav, boolean partition, boolean movable, double mass, double fric, int group) {
         Particle particle = new Particle();
 
         particle.att = att;
@@ -16,6 +16,8 @@ public class BasicBrush implements Brush{
         particle.mass = mass;
         particle.fric = fric;
         particle.group = group;
+        particle.partition = partition;
+        particle.movable = movable;
 
         particle.pos = new Vec2(0, 0);
         particle.vel = new Vec2(0, 0);

@@ -40,7 +40,7 @@ public class Renderer {
                             }
                         }
 
-//                        values[yPos][xPos] += particle.vel.length() * 5;
+                        values[yPos][xPos] += particle.vel.length() * 5;
                     }
                 }
             }

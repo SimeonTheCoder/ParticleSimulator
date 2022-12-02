@@ -1,6 +1,7 @@
 package app.ui.sensors.actions;
 
 import app.core.simulation.Simulation;
+import app.core.simulation.particles.Particle;
 import app.math.Vec2;
 import app.rendering.Renderer;
 import app.ui.AppWindow;
@@ -81,19 +82,19 @@ public class Actions implements ActionListener {
             }
 
             case PRESET_SOLID -> {
-                ((BrushCreation) window).config(100, 3, 50, 1, 10, true, 1);
+                ((BrushCreation) window).config(100, 3, 50, 1, 10, true, false, false, 1);
             }
 
             case PRESET_LIQUID -> {
-                ((BrushCreation) window).config(100, 0.2, 50, 1, 3, true, 2);
+                ((BrushCreation) window).config(100, 0.2, 50, 1, 3, true, false, false,  2);
             }
 
             case PRESET_GAS -> {
-                ((BrushCreation) window).config(100, 0.1, 50, 10, 0.1, true, 3);
+                ((BrushCreation) window).config(100, 0.1, 50, 10, 0.1, true,  false, false, 3);
             }
 
             case PRESET_WALL -> {
-                ((BrushCreation) window).config(0, 0.1, 30, 10, 10000, false, 4);
+                ((BrushCreation) window).config(0, 0.1, 30, 10, 10000, false, false, false,  4);
             }
 
             case ERASER_ACTION -> {
@@ -125,6 +126,12 @@ public class Actions implements ActionListener {
 
                 dialog.setVisible(true);
                 dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            }
+
+            case REMOVE_WALL_ACTION -> {
+                for (Particle particle : ((Ui) window).window.simulation.particles) {
+                    if(particle.partition) particle.active = false;
+                }
             }
         }
     }

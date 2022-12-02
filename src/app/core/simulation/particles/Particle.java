@@ -10,6 +10,9 @@ public class Particle {
 
     public boolean grav;
     public boolean active;
+    public boolean partition;
+    public boolean movable;
+
     public double mass;
     public double speedCap;
 
@@ -180,7 +183,21 @@ public class Particle {
         particle.setGrav(grav);
         particle.setGroup(group);
         particle.setCap(speedCap);
+        particle.setPartition(partition);
+        particle.setMovable(movable);
 
         return particle;
+    }
+
+    public Particle setPartition(boolean partition) {
+        this.partition = partition;
+
+        return this;
+    }
+
+    public Particle setMovable(boolean movable) {
+        this.movable = movable;
+
+        return this;
     }
 }

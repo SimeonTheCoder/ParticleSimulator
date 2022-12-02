@@ -17,6 +17,7 @@ public enum ActionCode {
     PRESET_WALL,
 
     ERASER_ACTION,
+    REMOVE_WALL_ACTION,
 
     CONFG_THREADS,
 

@@ -2,7 +2,6 @@ package app.ui;
 
 import app.core.Serialize;
 import app.core.simulation.Simulation;
-import app.core.simulation.particles.Particle;
 import app.core.simulation.threads.SimulationThread;
 import app.math.Vec2;
 import app.rendering.Renderer;
@@ -13,10 +12,6 @@ import app.ui.sensors.Mouse;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 public class Window extends JPanel implements AppWindow {
     private JFrame frame;
@@ -38,6 +33,7 @@ public class Window extends JPanel implements AppWindow {
         frame = new JFrame(title);
 
         frame.setSize(xSize, ySize);
+        frame.setUndecorated(true);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 

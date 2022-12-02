@@ -4,6 +4,7 @@ import app.ui.sensors.actions.ActionCode;
 import app.ui.sensors.actions.Actions;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class Ui implements AppWindow {
@@ -14,7 +15,10 @@ public class Ui implements AppWindow {
         frame = new JFrame();
 
         frame.setTitle("SEPience");
-        frame.setSize(75, 1000);
+        frame.setSize(100, 1000);
+
+        frame.setUndecorated(true);
+        frame.setBackground(new Color(32, 32, 32));
 
         frame.setLocation(1000, 0);
 
@@ -23,28 +27,47 @@ public class Ui implements AppWindow {
         panel.setBackground(new Color(32, 32, 32));
 //        panel.setBackground(new Color(32, 0, 0));
 
-        frame.setResizable(false);
+//        frame.setResizable(false);
 
-        JButton saveButton = new JButton("Save");
+        JButton saveButton = new JButton("\uD83D\uDCBE");
         saveButton.addActionListener(new Actions(ActionCode.SIMULATION_SAVE, this));
+        saveButton.setFont(saveButton.getFont().deriveFont(30, 30));
+        saveButton.setBorder(new LineBorder(new Color(32, 32, 32), 15, true));
 
-        JButton loadButton = new JButton("Load");
+        JButton loadButton = new JButton("📁");
         loadButton.addActionListener(new Actions(ActionCode.SIMULATION_LOAD, this));
+        loadButton.setFont(loadButton.getFont().deriveFont(30, 30));
+        loadButton.setBorder(new LineBorder(new Color(32, 32, 32), 15, true));
 
-        JButton brushMakeButton = new JButton("Brush");
+        JButton brushMakeButton = new JButton("\uD83D\uDD8C");
         brushMakeButton.addActionListener(new Actions(ActionCode.BRUSH_CREATE_POPUP, this));
+        brushMakeButton.setFont(brushMakeButton.getFont().deriveFont(30, 30));
+        brushMakeButton.setBorder(new LineBorder(new Color(32, 32, 32), 15, true));
 
-        JButton eraserButton = new JButton("Eraser");
+        JButton eraserButton = new JButton("⌫");
         eraserButton.addActionListener(new Actions(ActionCode.ERASER_ACTION, this));
+        eraserButton.setFont(eraserButton.getFont().deriveFont(30, 30));
+        eraserButton.setBorder(new LineBorder(new Color(32, 32, 32), 15, true));
 
-        JButton pauseButton = new JButton("Pause");
+        JButton removeButton = new JButton("\uD83E\uDD2F");
+        removeButton.addActionListener(new Actions(ActionCode.REMOVE_WALL_ACTION, this));
+        removeButton.setFont(removeButton.getFont().deriveFont(30, 30));
+        removeButton.setBorder(new LineBorder(new Color(32, 32, 32), 15, true));
+
+        JButton pauseButton = new JButton("⏸");
         pauseButton.addActionListener(new Actions(ActionCode.SIMULATION_PAUSE, this));
+        pauseButton.setFont(pauseButton.getFont().deriveFont(30, 30));
+        pauseButton.setBorder(new LineBorder(new Color(32, 32, 32), 15, true));
 
-        JButton pressureButton = new JButton("Pressure");
+        JButton pressureButton = new JButton("\uD83D\uDC53");
         pressureButton.addActionListener(new Actions(ActionCode.VIEW_PRESSURE, this));
+        pressureButton.setFont(pressureButton.getFont().deriveFont(30, 30));
+        pressureButton.setBorder(new LineBorder(new Color(32, 32, 32), 15, true));
 
-        JButton threadsButton = new JButton("Threads");
+        JButton threadsButton = new JButton("☠");
         threadsButton.addActionListener(new Actions(ActionCode.CONFG_THREADS, this));
+        threadsButton.setFont(threadsButton.getFont().deriveFont(30, 30));
+        threadsButton.setBorder(new LineBorder(new Color(32, 32, 32), 15, true));
 
         saveButton.setBackground(new Color(32, 32, 32));
         loadButton.setBackground(new Color(32, 32, 32));
@@ -61,7 +84,7 @@ public class Ui implements AppWindow {
         d.width = 140;
 
         separator.setPreferredSize(d);
-        panel.add(separator);
+//        panel.add(separator);
 
 //        panel.add(new JSeparator());
 
@@ -74,19 +97,27 @@ public class Ui implements AppWindow {
         panel.add(brushMakeButton);
         panel.add(eraserButton);
 
+        panel.add(removeButton);
+
         JSeparator separator2 = new JSeparator(SwingConstants.HORIZONTAL);
 
         Dimension d2 = separator2.getPreferredSize();
         d2.width = 140;
 
         separator2.setPreferredSize(d2);
-        panel.add(separator2);
+//        panel.add(separator2);
 
         pauseButton.setBackground(new Color(32, 32, 32));
         threadsButton.setBackground(new Color(32, 32, 32));
 
         pauseButton.setForeground(new Color(255, 255, 255));
         threadsButton.setForeground(new Color(255, 255, 255));
+
+        pressureButton.setForeground(new Color(255, 255, 255));
+        pressureButton.setBackground(new Color(32, 32, 32));
+
+        removeButton.setForeground(new Color(255, 255, 255));
+        removeButton.setBackground(new Color(32, 32, 32));
 
         panel.add(pauseButton);
         panel.add(pressureButton);

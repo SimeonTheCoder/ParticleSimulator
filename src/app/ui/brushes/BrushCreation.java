@@ -20,6 +20,8 @@ public class BrushCreation implements AppWindow {
     private JTextField group;
 
     private JCheckBox gravity;
+    private JCheckBox partition;
+    private JCheckBox movable;
 
     public BrushCreation(AppWindow window) {
         this.window = window;
@@ -64,6 +66,12 @@ public class BrushCreation implements AppWindow {
         gravityLabel.setForeground(new Color(255, 255, 255));
         gravityLabel.setBackground(new Color(32, 32, 32));
 
+        JLabel partitionLabel = new JLabel("Partition");
+        partition = new JCheckBox();
+
+        JLabel movableLabel = new JLabel("Movable");
+        movable = new JCheckBox();
+
         JLabel massLabel = new JLabel("Mass:");
         mass = new JTextField(10);
         massLabel.setForeground(new Color(255, 255, 255));
@@ -90,6 +98,12 @@ public class BrushCreation implements AppWindow {
 
         panel.add(gravityLabel);
         panel.add(gravity);
+
+        panel.add(partitionLabel);
+        panel.add(partition);
+
+        panel.add(movableLabel);
+        panel.add(movable);
 
         panel.add(massLabel);
         panel.add(mass);
@@ -153,12 +167,14 @@ public class BrushCreation implements AppWindow {
     }
 
     public Brush makeBrush() {
-        BasicBrush brush = new BasicBrush();
+        Brush brush = new BasicBrush();
 
         brush.build(
                 new Vec2(Double.parseDouble(attRadius.getText()), Double.parseDouble(attForce.getText())),
                 new Vec2(Double.parseDouble(repRadius.getText()), Double.parseDouble(repForce.getText())),
                 gravity.isSelected(),
+                partition.isSelected(),
+                movable.isSelected(),
                 Double.parseDouble(mass.getText()),
                 0.5,
                 Integer.parseInt(group.getText())
@@ -167,7 +183,7 @@ public class BrushCreation implements AppWindow {
         return brush;
     }
 
-    public void config(double attRadius, double attForce, double repRadius, double repForce, double mass, boolean grav, int group) {
+    public void config(double attRadius, double attForce, double repRadius, double repForce, double mass, boolean grav, boolean part, boolean mov, int group) {
         this.attRadius.setText(String.valueOf(attRadius));
         this.attForce.setText(String.valueOf(attForce));
 
@@ -179,5 +195,8 @@ public class BrushCreation implements AppWindow {
         this.gravity.setSelected(grav);
 
         this.group.setText(String.valueOf(group));
+
+        this.partition.setSelected(part);
+        this.movable.setSelected(mov);
     }
 }

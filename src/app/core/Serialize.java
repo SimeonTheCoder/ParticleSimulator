@@ -34,13 +34,14 @@ public class Serialize {
 
         for (Particle particle : simulation.particles) {
             if(particle.active) {
-                builder.append(String.format("%.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %s %.3f %d ",
+                builder.append(String.format("%.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %s %.3f %d %s %s ",
                         particle.pos.x, particle.pos.y,
                         particle.vel.x, particle.vel.y,
                         particle.att.x, particle.att.y,
                         particle.rep.x, particle.rep.y,
                         particle.grav, particle.mass,
-                        particle.group));
+                        particle.group,
+                        particle.partition, particle.movable));
             }
         }
 
@@ -82,7 +83,7 @@ public class Serialize {
 
         String[] content = line.split(" ");
 
-        for(int i = 0; i < content.length; i += 11) {
+        for(int i = 0; i < content.length; i += 13) {
             try {
                 Particle particle = Particle.build()
                         .setPos(new Vec2(Double.parseDouble(content[0 + i]), Double.parseDouble(content[1 + i])))
@@ -91,7 +92,9 @@ public class Serialize {
                         .setRep(new Vec2(Double.parseDouble(content[6 + i]), Double.parseDouble(content[7 + i])))
                         .setGrav(Boolean.parseBoolean(content[8 + i]))
                         .setMass(Double.parseDouble(content[9 + i]))
-                        .setGroup(Integer.parseInt(content[10 + i]));
+                        .setGroup(Integer.parseInt(content[10 + i]))
+                        .setPartition(Boolean.parseBoolean(content[11 + i]))
+                        .setMovable(Boolean.parseBoolean(content[12 + i]));
 
                 simulation.particles.add(particle);
             }catch (Exception exception) {
