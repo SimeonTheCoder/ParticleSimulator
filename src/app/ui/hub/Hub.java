@@ -35,6 +35,9 @@ public class Hub implements AppWindow {
         JButton aboutButton = new JButton("About");
         aboutButton.addActionListener(new Actions(ActionCode.ABOUT_INFO, this));
 
+        JButton platformButton = new JButton("Manage Simulations");
+        platformButton.addActionListener(new Actions(ActionCode.PLATFORM_OPEN, this));
+
         simulationButton.setBackground(new Color(32, 32, 32));
         aboutButton.setBackground(new Color(32, 32, 32));
 
@@ -42,7 +45,10 @@ public class Hub implements AppWindow {
         aboutButton.setForeground(new Color(255, 255, 255));
 
         panel.add(simulationButton);
+
         panel.add(aboutButton);
+
+        panel.add(platformButton);
 
         frame.add(panel);
 

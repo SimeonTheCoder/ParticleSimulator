@@ -33,7 +33,7 @@ public class Window extends JPanel implements AppWindow {
         frame = new JFrame(title);
 
         frame.setSize(xSize, ySize);
-        frame.setUndecorated(true);
+//        frame.setUndecorated(true);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,7 +56,6 @@ public class Window extends JPanel implements AppWindow {
         THREADED = false;
         ERASER = true;
         PRESSURE = false;
-
     }
 
     @Override

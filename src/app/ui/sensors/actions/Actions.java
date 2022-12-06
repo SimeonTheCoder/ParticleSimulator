@@ -4,10 +4,7 @@ import app.core.simulation.Simulation;
 import app.core.simulation.particles.Particle;
 import app.math.Vec2;
 import app.rendering.Renderer;
-import app.ui.AppWindow;
-import app.ui.PopUp;
-import app.ui.Ui;
-import app.ui.Window;
+import app.ui.*;
 import app.ui.brushes.BrushCreation;
 
 import javax.swing.*;
@@ -132,6 +129,14 @@ public class Actions implements ActionListener {
                 for (Particle particle : ((Ui) window).window.simulation.particles) {
                     if(particle.partition) particle.active = false;
                 }
+            }
+
+            case PLATFORM_DOWNLOAD -> {
+                ((Launcher) window).downloadSim();
+            }
+
+            case PLATFORM_OPEN -> {
+                Launcher launcher = new Launcher();
             }
         }
     }

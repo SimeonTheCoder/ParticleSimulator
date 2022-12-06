@@ -7,7 +7,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
-public class Ui implements AppWindow {
+public class Ui implements AppWindow{
     public JFrame frame;
     public Window window;
 
@@ -17,7 +17,7 @@ public class Ui implements AppWindow {
         frame.setTitle("SEPience");
         frame.setSize(100, 1000);
 
-        frame.setUndecorated(true);
+//        frame.setUndecorated(true);
         frame.setBackground(new Color(32, 32, 32));
 
         frame.setLocation(1000, 0);
