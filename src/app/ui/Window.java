@@ -25,7 +25,9 @@ public class Window extends JPanel implements AppWindow {
     public boolean PAUSED;
     public boolean THREADED;
     public boolean ERASER;
+
     public boolean PRESSURE;
+    public boolean VECTORS;
 
     public Brush brush;
 
@@ -64,8 +66,8 @@ public class Window extends JPanel implements AppWindow {
 
         long millis1 = System.currentTimeMillis();
 
-        selector.x = MouseInfo.getPointerInfo().getLocation().x - 10;
-        selector.y = MouseInfo.getPointerInfo().getLocation().y - 30;
+        selector.x = MouseInfo.getPointerInfo().getLocation().x - frame.getLocation().x;
+        selector.y = MouseInfo.getPointerInfo().getLocation().y - 10 - frame.getLocation().y;
 
         selector.x = ((int) (selector.x)) / 20 * 20;
         selector.y = ((int) (selector.y)) / 20 * 20;
@@ -88,7 +90,7 @@ public class Window extends JPanel implements AppWindow {
             }
         }
 
-        renderer.render((Graphics2D) g, simulation, PRESSURE);
+        renderer.render((Graphics2D) g, simulation, PRESSURE, VECTORS);
 
         g.setColor(new Color(255, 255, 0));
         g.fillRect((int) selector.x, (int) selector.y, 10, 10);

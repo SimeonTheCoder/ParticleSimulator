@@ -106,6 +106,10 @@ public class Actions implements ActionListener {
                 ((Ui) window).window.PRESSURE = !((Ui) window).window.PRESSURE;
             }
 
+            case VIEW_VECTORS -> {
+                ((Ui) window).window.VECTORS = !((Ui) window).window.VECTORS;
+            }
+
             case CONFG_THREADS -> {
                 ((Ui) window).window.THREADED = !((Ui) window).window.THREADED;
             }

@@ -7,7 +7,7 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
-public class Ui implements AppWindow{
+public class Ui implements AppWindow {
     public JFrame frame;
     public Window window;
 
@@ -49,7 +49,7 @@ public class Ui implements AppWindow{
         eraserButton.setFont(eraserButton.getFont().deriveFont(30, 30));
         eraserButton.setBorder(new LineBorder(new Color(32, 32, 32), 15, true));
 
-        JButton removeButton = new JButton("\uD83E\uDD2F");
+        JButton removeButton = new JButton("\uD83D\uDCA5");
         removeButton.addActionListener(new Actions(ActionCode.REMOVE_WALL_ACTION, this));
         removeButton.setFont(removeButton.getFont().deriveFont(30, 30));
         removeButton.setBorder(new LineBorder(new Color(32, 32, 32), 15, true));
@@ -63,6 +63,11 @@ public class Ui implements AppWindow{
         pressureButton.addActionListener(new Actions(ActionCode.VIEW_PRESSURE, this));
         pressureButton.setFont(pressureButton.getFont().deriveFont(30, 30));
         pressureButton.setBorder(new LineBorder(new Color(32, 32, 32), 15, true));
+
+        JButton motionVectorButton = new JButton("➡️");
+        motionVectorButton.addActionListener(new Actions(ActionCode.VIEW_VECTORS, this));
+        motionVectorButton.setFont(pressureButton.getFont().deriveFont(30, 30));
+        motionVectorButton.setBorder(new LineBorder(new Color(32, 32, 32), 15, true));
 
         JButton threadsButton = new JButton("☠");
         threadsButton.addActionListener(new Actions(ActionCode.CONFG_THREADS, this));
@@ -120,7 +125,10 @@ public class Ui implements AppWindow{
         removeButton.setBackground(new Color(32, 32, 32));
 
         panel.add(pauseButton);
+
         panel.add(pressureButton);
+        panel.add(motionVectorButton);
+
         panel.add(threadsButton);
 
         frame.add(panel);

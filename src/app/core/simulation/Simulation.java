@@ -113,5 +113,13 @@ public class Simulation {
 
     public void threadedStep() {
         SimulationThread.paused = false;
+
+        for (SimulationThread thread : threads) {
+            if(!thread.isAlive()) {
+                thread = new SimulationThread(thread.threadIndex, particles, globalForces);
+
+                thread.start();
+            }
+        }
     }
 }

@@ -12,6 +12,8 @@ public class Vec2 {
     public double length() {
         if(!FAST_ROOT) {
             return Math.sqrt(x * x + y * y);
+
+//            return 1 / invSqrt(x * x + y * y);
         }else{
             return Double.longBitsToDouble( ( ( Double.doubleToLongBits( x*x + y*y )-(1l<<52) )>>1 ) + ( 1l<<61 ) );
         }
@@ -32,5 +34,14 @@ public class Vec2 {
 
         this.x /= l;
         this.y /= l;
+    }
+
+    public static double invSqrt(double x) {
+        double xhalf = 0.5d * x;
+        long i = Double.doubleToLongBits(x);
+        i = 0x5fe6ec85e7de30daL - (i >> 1);
+        x = Double.longBitsToDouble(i);
+        x *= (1.5d - xhalf * x * x);
+        return x;
     }
 }

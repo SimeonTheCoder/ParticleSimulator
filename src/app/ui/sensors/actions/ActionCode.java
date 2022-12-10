@@ -24,6 +24,7 @@ public enum ActionCode {
     ABOUT_INFO,
 
     VIEW_PRESSURE,
+    VIEW_VECTORS,
 
     PLATFORM_DOWNLOAD,
     PLATFORM_OPEN

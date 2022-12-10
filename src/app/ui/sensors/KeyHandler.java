@@ -37,7 +37,7 @@ public class KeyHandler {
 
             case 5: {
                 for (int i = 0; i < SPAWN_RATE; i++) {
-                    window.THREADED = false;
+//                    window.THREADED = false;
 
                     window.simulation.particles.add(
                             Particle.build()
@@ -58,7 +58,7 @@ public class KeyHandler {
 
             case 6: {
                 for (int i = 0; i < SPAWN_RATE; i++) {
-                    window.THREADED = false;
+//                    window.THREADED = false;
 
                     window.simulation.particles.add(
                             Particle.build()
@@ -78,7 +78,7 @@ public class KeyHandler {
 
             case 7: {
                 for (int i = 0; i < SPAWN_RATE; i++) {
-                    window.THREADED = false;
+//                    window.THREADED = false;
 
                     window.simulation.particles.add(
                             Particle.build()
@@ -98,7 +98,7 @@ public class KeyHandler {
             }
 
             case 8: {
-                window.THREADED = false;
+//                window.THREADED = false;
 
                 for (int i = -10; i < 10; i += 5) {
                     for (int j = -10; j < 10; j += 5) {
@@ -143,7 +143,7 @@ public class KeyHandler {
             }
 
             case 10: {
-                window.THREADED = false;
+//                window.THREADED = false;
 
                 for (int i = 0; i < 500; i += 20) {
                     window.simulation.particles.add(
@@ -163,7 +163,7 @@ public class KeyHandler {
             }
 
             case 11: {
-                window.THREADED = false;
+//                window.THREADED = false;
 
                 for (int i = 0; i < SPAWN_RATE; i++) {
                     window.simulation.particles.add(
@@ -207,7 +207,7 @@ public class KeyHandler {
             }
 
             case 16: {
-                window.THREADED = false;
+//                window.THREADED = false;
 
                 if (window.brush.getGroup() != 4) {
                     for (int i = 0; i < SPAWN_RATE; i++) {

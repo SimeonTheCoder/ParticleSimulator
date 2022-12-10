@@ -11,7 +11,7 @@ public class SimulationThread extends Thread{
     public List<Vec2> globalForces;
 
     public int threadIndex;
-    public double THREAD_COUNT = 4.;
+    public double THREAD_COUNT = 8.;
 
     public static boolean DIS_CHECK = false;
     public static boolean paused = false;
@@ -30,7 +30,7 @@ public class SimulationThread extends Thread{
         while(true) {
             clock ++;
 
-            if (clock % 100 == 0) {
+            if (clock % 1 == 0) {
                 System.out.println(SimulationThread.paused);
             }
 
@@ -42,7 +42,7 @@ public class SimulationThread extends Thread{
 
                     Particle particle = particles.get(pIndex);
 
-                    particle.closestDistance = 30;
+                    particle.closestDistance = 100;
 
                     if (!particle.active) continue;
 

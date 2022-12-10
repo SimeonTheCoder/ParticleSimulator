@@ -17,7 +17,7 @@ public class Renderer {
     public static boolean DEBUG = true;
     private Random random;
 
-    public void render(Graphics2D g, Simulation simulation, boolean PRESSURE) {
+    public void render(Graphics2D g, Simulation simulation, boolean PRESSURE, boolean VECTORS) {
         g.setColor(new Color(32, 32, 32));
         g.fillRect(0, 0, 1920, 1080);
 
@@ -32,9 +32,9 @@ public class Renderer {
                     if (yPos > 0 && yPos < 1000) {
                         double d = Math.max(0, 30 - particle.closestDistance);
 
-                        for(int i = (int) (-d / 2); i < d; i++) {
-                            for(int j = (int) (-d / 2); j < d; j++) {
-                                if(xPos + i >= 0 && xPos + i < 1000 && yPos + j >= 0 && yPos + j < 1000) {
+                        for (int i = (int) (-d / 2); i < d; i++) {
+                            for (int j = (int) (-d / 2); j < d; j++) {
+                                if (xPos + i >= 0 && xPos + i < 1000 && yPos + j >= 0 && yPos + j < 1000) {
                                     values[yPos + j][xPos + i] += particle.vel.length() * 5;
                                 }
                             }
@@ -91,8 +91,10 @@ public class Renderer {
                     g.fillRect((int) particle.pos.x, (int) particle.pos.y, 10, 10);
                 }
 
-                g.drawLine((int) particle.pos.x, (int) particle.pos.y,
-                        (int) (particle.pos.x + particle.vel.x * 3), (int) (particle.pos.y + particle.vel.y * 3));
+                if (VECTORS) {
+                    g.drawLine((int) particle.pos.x, (int) particle.pos.y,
+                            (int) (particle.pos.x + particle.vel.x * 3), (int) (particle.pos.y + particle.vel.y * 3));
+                }
             }
         }
     }
