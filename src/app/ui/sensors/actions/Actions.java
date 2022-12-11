@@ -79,19 +79,19 @@ public class Actions implements ActionListener {
             }
 
             case PRESET_SOLID -> {
-                ((BrushCreation) window).config(100, 3, 50, 1, 10, true, false, false, 1);
+                ((BrushCreation) window).config(100, 3, 50, 1, 10, true, false, false, 1, 1);
             }
 
             case PRESET_LIQUID -> {
-                ((BrushCreation) window).config(100, 0.2, 50, 1, 3, true, false, false,  2);
+                ((BrushCreation) window).config(100, 0.2, 50, 1, 3, true, false, false,  2, 1);
             }
 
             case PRESET_GAS -> {
-                ((BrushCreation) window).config(100, 0.1, 50, 10, 0.1, true,  false, false, 3);
+                ((BrushCreation) window).config(100, 0.1, 50, 10, 0.1, true,  false, false, 3, 1);
             }
 
             case PRESET_WALL -> {
-                ((BrushCreation) window).config(0, 0.1, 30, 10, 10000, false, false, false,  4);
+                ((BrushCreation) window).config(0, 0.1, 30, 10, 10000, false, false, false,  4, 1);
             }
 
             case ERASER_ACTION -> {

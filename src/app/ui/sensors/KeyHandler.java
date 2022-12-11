@@ -210,7 +210,7 @@ public class KeyHandler {
 //                window.THREADED = false;
 
                 if (window.brush.getGroup() != 4) {
-                    for (int i = 0; i < SPAWN_RATE; i++) {
+                    for (int i = 0; i < window.brush.getCount(); i++) {
                         window.simulation.particles.add(
                                 window.brush.action(new Vec2(window.selector.x, window.selector.y), new Vec2(0, 0))
                         );

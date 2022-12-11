@@ -18,7 +18,7 @@ public class Renderer {
     private Random random;
 
     public void render(Graphics2D g, Simulation simulation, boolean PRESSURE, boolean VECTORS) {
-        g.setColor(new Color(32, 32, 32));
+        g.setColor(new Color(0, 20, 40));
         g.fillRect(0, 0, 1920, 1080);
 
         if (PRESSURE) {

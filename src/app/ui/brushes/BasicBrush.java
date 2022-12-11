@@ -5,9 +5,10 @@ import app.math.Vec2;
 
 public class BasicBrush implements Brush{
     private Particle instance;
+    private int count;
 
     @Override
-    public void build(Vec2 att, Vec2 rep, boolean grav, boolean partition, boolean movable, double mass, double fric, int group) {
+    public void build(Vec2 att, Vec2 rep, boolean grav, boolean partition, boolean movable, double mass, double fric, int group, int count) {
         Particle particle = new Particle();
 
         particle.att = att;
@@ -25,6 +26,8 @@ public class BasicBrush implements Brush{
         particle.active = true;
         particle.speedCap = 5;
 
+        this.count = count;
+
         this.instance = particle;
     }
 
@@ -36,5 +39,21 @@ public class BasicBrush implements Brush{
     @Override
     public int getGroup() {
         return instance.group;
+    }
+
+    public Particle getInstance() {
+        return instance;
+    }
+
+    public void setInstance(Particle instance) {
+        this.instance = instance;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 }

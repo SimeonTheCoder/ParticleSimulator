@@ -5,6 +5,7 @@ import app.ui.sensors.actions.ActionCode;
 import app.ui.sensors.actions.Actions;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class Hub implements AppWindow {
@@ -22,7 +23,7 @@ public class Hub implements AppWindow {
 
         JPanel panel = new JPanel();
 
-        panel.setBackground(new Color(32, 32, 32));
+        panel.setBackground(new Color(0, 20, 40));
 
         ImageIcon imageIcon = new ImageIcon("ParticleSimulation/assets/brand/sepience_logo_red.png");
 
@@ -38,11 +39,18 @@ public class Hub implements AppWindow {
         JButton platformButton = new JButton("Manage Simulations");
         platformButton.addActionListener(new Actions(ActionCode.PLATFORM_OPEN, this));
 
-        simulationButton.setBackground(new Color(32, 32, 32));
-        aboutButton.setBackground(new Color(32, 32, 32));
+        simulationButton.setBackground(new Color(250, 188, 26));
+        simulationButton.setBorder(new LineBorder(new Color(0, 20, 40), 1, true));
 
-        simulationButton.setForeground(new Color(255, 255, 255));
-        aboutButton.setForeground(new Color(255, 255, 255));
+        platformButton.setBackground(new Color(250, 188, 26));
+        platformButton.setBorder(new LineBorder(new Color(0, 20, 40), 1, true));
+
+        aboutButton.setBackground(new Color(250, 188, 26));
+        aboutButton.setBorder(new LineBorder(new Color(0, 20, 40), 1, true));
+
+        simulationButton.setForeground(new Color(0, 20, 40));
+        platformButton.setForeground(new Color(0, 20, 40));
+        aboutButton.setForeground(new Color(0, 20, 40));
 
         panel.add(simulationButton);
 
