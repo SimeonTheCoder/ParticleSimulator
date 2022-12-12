@@ -149,13 +149,13 @@ public class Ui implements AppWindow {
         System.out.println();
 
         switch (actionCode) {
-            case SIMULATION_SAVE -> {
+            case SIMULATION_SAVE: {
                 window.save(value);
 
                 break;
             }
 
-            case SIMULATION_LOAD -> {
+            case SIMULATION_LOAD: {
                 window.load(value);
 
                 break;

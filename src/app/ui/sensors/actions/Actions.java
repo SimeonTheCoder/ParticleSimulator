@@ -23,7 +23,7 @@ public class Actions implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (actionCode) {
-            case SIMULATION_WINDOW -> {
+            case SIMULATION_WINDOW: {
                 Renderer renderer = new Renderer();
 
                 Simulation simulation = new Simulation();
@@ -42,33 +42,43 @@ public class Actions implements ActionListener {
                 Ui ui = new Ui();
 
                 ui.window = window;
+
+                break;
             }
 
-            case POPUP_SUBMIT -> {
+            case POPUP_SUBMIT: {
                 window.setVisible(false);
 
                 ((PopUp) window).getUi().call(((PopUp) window).getActionCode(), ((PopUp) window).getField().getText());
+
+                break;
             }
 
-            case SIMULATION_SAVE -> {
+            case SIMULATION_SAVE: {
                 PopUp popUp = new PopUp("Save Name", (Ui) window);
 
                 popUp.setActionCode(ActionCode.SIMULATION_SAVE);
                 popUp.frame.setSize(500, 100);
+
+                break;
             }
 
-            case SIMULATION_LOAD -> {
+            case SIMULATION_LOAD: {
                 PopUp popUp = new PopUp("File name", (Ui) window);
 
                 popUp.setActionCode(ActionCode.SIMULATION_LOAD);
                 popUp.frame.setSize(500, 100);
+
+                break;
             }
 
-            case BRUSH_CREATE_POPUP -> {
+            case BRUSH_CREATE_POPUP: {
                 BrushCreation brushCreation = new BrushCreation(window);
+
+                break;
             }
 
-            case BRUSH_CREATE_SUBMIT -> {
+            case BRUSH_CREATE_SUBMIT: {
                 BrushCreation brushUi = (BrushCreation) window;
 
                 ((Ui) brushUi.window).window.setBrush(brushUi.makeBrush());
@@ -76,45 +86,65 @@ public class Actions implements ActionListener {
                 ((Ui) brushUi.window).window.ERASER = false;
 
                 brushUi.setVisible(false);
+
+                break;
             }
 
-            case PRESET_SOLID -> {
+            case PRESET_SOLID: {
                 ((BrushCreation) window).config(100, 3, 50, 1, 10, true, false, false, 1, 1);
+
+                break;
             }
 
-            case PRESET_LIQUID -> {
+            case PRESET_LIQUID: {
                 ((BrushCreation) window).config(100, 0.2, 50, 1, 3, true, false, false,  2, 1);
+
+                break;
             }
 
-            case PRESET_GAS -> {
+            case PRESET_GAS: {
                 ((BrushCreation) window).config(100, 0.1, 50, 10, 0.1, true,  false, false, 3, 1);
+
+                break;
             }
 
-            case PRESET_WALL -> {
+            case PRESET_WALL: {
                 ((BrushCreation) window).config(0, 0.1, 30, 10, 10000, false, false, false,  4, 1);
+
+                break;
             }
 
-            case ERASER_ACTION -> {
+            case ERASER_ACTION: {
                 ((Ui) window).window.ERASER = true;
+
+                break;
             }
 
-            case SIMULATION_PAUSE -> {
+            case SIMULATION_PAUSE: {
                 ((Ui) window).window.PAUSED = !((Ui) window).window.PAUSED;
+
+                break;
             }
 
-            case VIEW_PRESSURE -> {
+            case VIEW_PRESSURE: {
                 ((Ui) window).window.PRESSURE = !((Ui) window).window.PRESSURE;
+
+                break;
             }
 
-            case VIEW_VECTORS -> {
+            case VIEW_VECTORS: {
                 ((Ui) window).window.VECTORS = !((Ui) window).window.VECTORS;
+
+                break;
             }
 
-            case CONFG_THREADS -> {
+            case CONFG_THREADS: {
                 ((Ui) window).window.THREADED = !((Ui) window).window.THREADED;
+
+                break;
             }
 
-            case ABOUT_INFO -> {
+            case ABOUT_INFO: {
                 JDialog dialog = new JDialog();
 
                 dialog.setTitle("About SEPience");
@@ -127,20 +157,26 @@ public class Actions implements ActionListener {
 
                 dialog.setVisible(true);
                 dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+                break;
             }
 
-            case REMOVE_WALL_ACTION -> {
+            case REMOVE_WALL_ACTION: {
                 for (Particle particle : ((Ui) window).window.simulation.particles) {
                     if(particle.partition) particle.active = false;
+
+                    break;
                 }
             }
 
-            case PLATFORM_DOWNLOAD -> {
+            case PLATFORM_DOWNLOAD: {
                 ((Launcher) window).downloadSim();
             }
 
-            case PLATFORM_OPEN -> {
+            case PLATFORM_OPEN: {
                 Launcher launcher = new Launcher();
+
+                break;
             }
         }
     }
