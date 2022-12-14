@@ -3,14 +3,29 @@ package app.rendering;
 import app.core.simulation.Simulation;
 import app.core.simulation.particles.Particle;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
 public class Renderer {
     public int[][] values;
 
+    private int time = 0;
+
+    public BufferedImage gasSprite;
+
     public Renderer() {
         values = new int[1000][1000];
+
+        try {
+            gasSprite = ImageIO.read(new File("ParticleSimulation/assets/sprites/gas.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         random = new Random();
     }
 
@@ -18,6 +33,8 @@ public class Renderer {
     private Random random;
 
     public void render(Graphics2D g, Simulation simulation, boolean PRESSURE, boolean VECTORS) {
+        time ++;
+
         g.setColor(new Color(0, 20, 40));
         g.fillRect(0, 0, 1920, 1080);
 
@@ -73,7 +90,7 @@ public class Renderer {
                     g.setColor(Color.DARK_GRAY);
                 }
 
-                if (particle.group != 4) {
+                if (particle.group != 4 && particle.group != 3) {
                     int closestDistance = Math.max(5, (int) (30 - particle.closestDistance));
 
                     g.fillOval((int) particle.pos.x - closestDistance,
@@ -87,8 +104,21 @@ public class Renderer {
                                     closestDistance, closestDistance);
                         }
                     }
-                } else {
+                } else if(particle.group == 4){
                     g.fillRect((int) particle.pos.x, (int) particle.pos.y, 10, 10);
+                } else if(particle.group == 3) {
+                    int closestDistance = Math.max(5, (int) (20 - particle.closestDistance));
+
+                    int d = simulation.particles.indexOf(particle) * 195;
+
+                    Graphics2D g2d = (Graphics2D) g.create();
+//                    g2d = gasSprite.createGraphics();
+
+                    g2d.rotate(d, particle.pos.x, particle.pos.y);
+                    g2d.drawImage(gasSprite, (int) (particle.pos.x - closestDistance * 10 - 30), (int) (particle.pos.y - closestDistance * 10 - 30),
+                            closestDistance * 20 + 60, closestDistance * 20 + 60, null);
+
+                    g2d.dispose();
                 }
 
                 if (VECTORS) {
