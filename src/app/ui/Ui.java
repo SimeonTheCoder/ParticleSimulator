@@ -64,7 +64,7 @@ public class Ui implements AppWindow {
         pressureButton.setFont(pressureButton.getFont().deriveFont(30, 30));
         pressureButton.setBorder(new LineBorder(new Color(0, 20, 40), 15, true));
 
-        JButton motionVectorButton = new JButton("➡️");
+        JButton motionVectorButton = new JButton(" V ");
         motionVectorButton.addActionListener(new Actions(ActionCode.VIEW_VECTORS, this));
         motionVectorButton.setFont(pressureButton.getFont().deriveFont(30, 30));
         motionVectorButton.setBorder(new LineBorder(new Color(0, 20, 40), 15, true));

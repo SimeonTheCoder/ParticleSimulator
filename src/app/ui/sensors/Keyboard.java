@@ -17,7 +17,9 @@ public class Keyboard implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
+        char c = e.getKeyChar();
 
+        if(c == '1') handler.handle(5, window);
     }
 
     @Override
@@ -28,7 +30,6 @@ public class Keyboard implements KeyListener {
         if(c == 'd') handler.handle(2, window);
         if(c == 'w') handler.handle(3, window);
         if(c == 's') handler.handle(4, window);
-        if(c == '1') handler.handle(5, window);
         if(c == '2') handler.handle(6, window);
         if(c == '3') handler.handle(7, window);
         if(c == '4') handler.handle(8, window);

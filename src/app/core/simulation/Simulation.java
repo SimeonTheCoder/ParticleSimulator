@@ -101,6 +101,8 @@ public class Simulation {
 
             particle.cap();
 
+//            System.out.println();
+
             if(particle.grav) {
                 for (Vec2 globalForce : globalForces) {
                     particle.vel.add(globalForce);

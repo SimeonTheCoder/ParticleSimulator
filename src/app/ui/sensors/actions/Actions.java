@@ -149,7 +149,7 @@ public class Actions implements ActionListener {
 
                 dialog.setTitle("About SEPience");
 
-                dialog.getContentPane().add(new JLabel("About v0.1: Created by Simeon Petkov, Copyright 2022"));
+                dialog.getContentPane().add(new JLabel("About v0.2: Created by Simeon Petkov, Copyright 2023"));
 
                 dialog.setSize(400, 100);
 
