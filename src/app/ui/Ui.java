@@ -146,8 +146,6 @@ public class Ui implements AppWindow {
     }
 
     public void call(ActionCode actionCode, String value) {
-        System.out.println();
-
         switch (actionCode) {
             case SIMULATION_SAVE: {
                 window.save(value);

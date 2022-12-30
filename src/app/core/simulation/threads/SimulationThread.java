@@ -6,7 +6,7 @@ import app.math.Vec2;
 
 import java.util.List;
 
-public class SimulationThread extends Thread{
+public class SimulationThread extends Thread {
     public static List<Particle> particles;
     public List<Vec2> globalForces;
 
@@ -27,14 +27,12 @@ public class SimulationThread extends Thread{
 
     @Override
     public synchronized void run() {
-        while(true) {
-            clock ++;
+        while (true) {
+            clock++;
 
-            if (clock % 1 == 0) {
-                System.out.println(SimulationThread.paused);
-            }
+            System.out.println(SimulationThread.paused);
 
-            if(!SimulationThread.paused) {
+            if (!SimulationThread.paused) {
                 Simulation.finished[threadIndex] = false;
 
                 for (int pIndex = (int) (threadIndex / THREAD_COUNT * particles.size()); pIndex < (int) ((threadIndex + 1) / THREAD_COUNT * particles.size()); pIndex++) {
@@ -78,7 +76,7 @@ public class SimulationThread extends Thread{
 
                         double dis = dvec.length();
 
-                        if(!((Double) dis).isNaN()) {
+                        if (!((Double) dis).isNaN()) {
                             particle.closestDistance = Math.max(5, Math.min(particle.closestDistance, dis));
                         }
 

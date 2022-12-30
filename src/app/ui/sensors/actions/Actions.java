@@ -15,9 +15,19 @@ public class Actions implements ActionListener {
     private ActionCode actionCode;
     private AppWindow window;
 
+    private int param;
+
     public Actions(ActionCode actionCode, AppWindow window) {
         this.actionCode = actionCode;
         this.window = window;
+
+        param = 0;
+    }
+
+    public Actions(ActionCode actionCode, AppWindow window, int param) {
+        this.actionCode = actionCode;
+        this.window = window;
+        this.param = param;
     }
 
     @Override
@@ -97,19 +107,25 @@ public class Actions implements ActionListener {
             }
 
             case PRESET_LIQUID: {
-                ((BrushCreation) window).config(100, 0.2, 50, 1, 3, true, false, false,  2, 1);
+                ((BrushCreation) window).config(100, 0.2, 50, 1, 3, true, false, false, 2, 1);
 
                 break;
             }
 
             case PRESET_GAS: {
-                ((BrushCreation) window).config(100, 0.1, 50, 10, 0.1, true,  false, false, 3, 1);
+                ((BrushCreation) window).config(100, 0.1, 50, 10, 0.1, true, false, false, 3, 1);
 
                 break;
             }
 
             case PRESET_WALL: {
-                ((BrushCreation) window).config(0, 0.1, 30, 10, 10000, false, false, false,  4, 1);
+                ((BrushCreation) window).config(0, 0.1, 30, 10, 10000, false, false, false, 4, 1);
+
+                break;
+            }
+
+            case PRESET_USED: {
+                ((BrushCreation) window).parseFromFile(param);
 
                 break;
             }
@@ -163,7 +179,7 @@ public class Actions implements ActionListener {
 
             case REMOVE_WALL_ACTION: {
                 for (Particle particle : ((Ui) window).window.simulation.particles) {
-                    if(particle.partition) particle.active = false;
+                    if (particle.partition) particle.active = false;
 
                     break;
                 }

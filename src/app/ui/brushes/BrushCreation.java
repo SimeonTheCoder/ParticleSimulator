@@ -4,11 +4,30 @@ import app.math.Vec2;
 import app.ui.AppWindow;
 import app.ui.sensors.actions.ActionCode;
 import app.ui.sensors.actions.Actions;
+import utils.cfg.CFGPropertyReader;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class BrushCreation implements AppWindow {
+    private static final String BRUSH_CONFIG_FILE = "ParticleSimulation/config/brushes/preset_";
+
+    private static final String[] syntax = {
+            "attraction_force",
+            "attraction_radius",
+            "repulsion_force",
+            "repulsion_force",
+            "mass",
+            "gravity",
+            "partition",
+            "movable",
+            "group",
+            "count"
+    };
+
     public JFrame frame;
     public AppWindow window;
 
@@ -18,7 +37,7 @@ public class BrushCreation implements AppWindow {
     private JTextField repForce;
     private JTextField mass;
     private JTextField group;
-    
+
     private JTextField count;
 
     private JCheckBox gravity;
@@ -84,13 +103,13 @@ public class BrushCreation implements AppWindow {
         mass.setForeground(new Color(250, 128, 26));
         mass.setBackground(new Color(0, 20, 40));
 
-        JLabel groupLabel = new JLabel("Group: ");
+        JLabel groupLabel = new JLabel("Group = ");
         group = new JTextField(10);
         groupLabel.setForeground(new Color(250, 128, 26));
         group.setForeground(new Color(250, 128, 26));
         group.setBackground(new Color(0, 20, 40));
-        
-        JLabel countLabel = new JLabel("Count: ");
+
+        JLabel countLabel = new JLabel("Count = ");
         count = new JTextField(10);
         countLabel.setForeground(new Color(250, 128, 26));
         count.setForeground(new Color(250, 128, 26));
@@ -134,34 +153,35 @@ public class BrushCreation implements AppWindow {
         separator.setPreferredSize(d);
         panel.add(separator);
 
-        JButton solidPresetButton = new JButton("Solid");
-        solidPresetButton.addActionListener(new Actions(ActionCode.PRESET_SOLID, this));
+        int fileCount = new File("ParticleSimulation/config/brushes").listFiles().length;
 
-        JButton liquidPresetButton = new JButton("Liquid");
-        liquidPresetButton.addActionListener(new Actions(ActionCode.PRESET_LIQUID, this));
+        for (int i = 1; i <= fileCount; i++) {
+            String filename = String.format("%s%d.cfg", BRUSH_CONFIG_FILE, i);
 
-        JButton gasPresetButton = new JButton("Gas");
-        gasPresetButton.addActionListener(new Actions(ActionCode.PRESET_GAS, this));
+            File file = new File(filename);
 
-        JButton wallPresetButton = new JButton("Wall");
-        wallPresetButton.addActionListener(new Actions(ActionCode.PRESET_WALL, this));
+            if (file.exists()) {
+                Scanner scanner = null;
 
-        solidPresetButton.setBackground(new Color(0, 20, 40));
-        liquidPresetButton.setBackground(new Color(0, 20, 40));
+                try {
+                    scanner = new Scanner(file);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
 
-        solidPresetButton.setForeground(new Color(250, 128, 26));
-        liquidPresetButton.setForeground(new Color(250, 128, 26));
+                String line = scanner.nextLine();
 
-        gasPresetButton.setBackground(new Color(0, 20, 40));
-        wallPresetButton.setBackground(new Color(0, 20, 40));
+                String presetTitle = line.split(" = ")[1];
 
-        gasPresetButton.setForeground(new Color(250, 128, 26));
-        wallPresetButton.setForeground(new Color(250, 128, 26));
+                JButton presetButton = new JButton(presetTitle);
+                presetButton.addActionListener(new Actions(ActionCode.PRESET_USED, this, i));
 
-        panel.add(solidPresetButton);
-        panel.add(liquidPresetButton);
-        panel.add(gasPresetButton);
-        panel.add(wallPresetButton);
+                presetButton.setBackground(new Color(0, 20, 40));
+                presetButton.setForeground(new Color(250, 128, 26));
+
+                panel.add(presetButton);
+            }
+        }
 
         JButton createBrush = new JButton(" - Create brush - ");
         createBrush.addActionListener(new Actions(ActionCode.BRUSH_CREATE_SUBMIT, this));
@@ -216,5 +236,35 @@ public class BrushCreation implements AppWindow {
         this.movable.setSelected(mov);
 
         this.count.setText(String.valueOf(count));
+    }
+
+    public void parseFromFile(int index) {
+        String filename = BRUSH_CONFIG_FILE + index + ".cfg";
+
+        File file = new File(filename);
+
+        if (file.exists()) {
+            Scanner scanner = null;
+
+            try {
+                scanner = new Scanner(file);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
+            double attForceVal = CFGPropertyReader.readDouble(file, syntax, 0), attForceRad = CFGPropertyReader.readDouble(file, syntax, 1);
+            double repForceVal = CFGPropertyReader.readDouble(file, syntax, 2), repForceRad = CFGPropertyReader.readDouble(file, syntax, 3);
+
+            double mass = CFGPropertyReader.readDouble(file, syntax, 4);
+
+            boolean grav = CFGPropertyReader.readBool(file, syntax, 5);
+            boolean part = CFGPropertyReader.readBool(file, syntax, 6);
+            boolean mov = CFGPropertyReader.readBool(file, syntax, 7);
+
+            int group = CFGPropertyReader.readInt(file, syntax, 8);
+            int count = CFGPropertyReader.readInt(file, syntax, 9);
+
+            config(attForceRad, attForceVal, repForceRad, repForceVal, mass, grav, part, mov, group, count);
+        }
     }
 }

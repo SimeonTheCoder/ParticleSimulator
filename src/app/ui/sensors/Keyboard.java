@@ -19,7 +19,7 @@ public class Keyboard implements KeyListener {
     public void keyTyped(KeyEvent e) {
         char c = e.getKeyChar();
 
-        if(c == '1') handler.handle(5, window);
+        if(c == '1') handler.handle(16, window);
     }
 
     @Override

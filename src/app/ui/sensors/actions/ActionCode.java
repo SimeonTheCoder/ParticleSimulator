@@ -27,5 +27,5 @@ public enum ActionCode {
     VIEW_VECTORS,
 
     PLATFORM_DOWNLOAD,
-    PLATFORM_OPEN
+    PRESET_USED, PLATFORM_OPEN
 }

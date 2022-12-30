@@ -14,8 +14,6 @@ import java.util.Scanner;
 
 public class Serialize {
     public void save(String name, Simulation simulation) {
-        System.out.println();
-
         StringBuilder builder = new StringBuilder();
 
         List<Vec2> positions = new ArrayList<>();
