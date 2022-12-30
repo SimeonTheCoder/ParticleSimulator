@@ -19,7 +19,7 @@ public class BrushCreation implements AppWindow {
             "attraction_force",
             "attraction_radius",
             "repulsion_force",
-            "repulsion_force",
+            "repulsion_radius",
             "mass",
             "gravity",
             "partition",

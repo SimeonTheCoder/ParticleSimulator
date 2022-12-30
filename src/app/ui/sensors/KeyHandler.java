@@ -4,6 +4,11 @@ import app.core.simulation.particles.Particle;
 import app.core.simulation.threads.SimulationThread;
 import app.math.Vec2;
 import app.ui.Window;
+import utils.cfg.CFGPropertyReader;
+
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 
 public class KeyHandler {
     private static final int MOVEMENT_SPEED = 20;
@@ -145,7 +150,7 @@ public class KeyHandler {
             case 10: {
 //                window.THREADED = false;
 
-                for (int i = 0; i < 500; i += 20) {
+                for (int i = 0; i < 1000; i += 20) {
                     window.simulation.particles.add(
                             Particle.build()
                                     .setVel(new Vec2(0, 0))
@@ -226,6 +231,35 @@ public class KeyHandler {
                 }
 
                 break;
+            }
+
+            case 17: {
+                String[] syntax = {
+                        "background_image",
+                        "gravity"
+                };
+
+                window.currentBackground++;
+                window.currentBackground %= window.backgroundCount;
+
+                String filename = String.format("%s%d.cfg", "ParticleSimulation/config/backgrounds/background_", window.currentBackground + 1);
+
+                File file = new File(filename);
+
+                if (file.exists()) {
+                    String backgroundAddress = CFGPropertyReader.readString(file, syntax, 0);
+
+                    try {
+                        window.backgroundImage = ImageIO.read(new File(backgroundAddress));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    double gravity = CFGPropertyReader.readDouble(file, syntax, 1);
+
+                    window.simulation.globalForces.clear();
+                    window.simulation.globalForces.add(new Vec2(0, gravity / 100));
+                }
             }
         }
     }

@@ -38,7 +38,7 @@ public class Actions implements ActionListener {
 
                 Simulation simulation = new Simulation();
 
-                simulation.globalForces.add(new Vec2(0, 9.8 / 100));
+                simulation.globalForces.add(new Vec2(0, 9.8 / 100.0));
 
                 Window window = new Window("Particle Simulation", 1000,
                         1000, renderer);

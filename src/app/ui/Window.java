@@ -9,9 +9,14 @@ import app.ui.brushes.Brush;
 import app.ui.sensors.KeyHandler;
 import app.ui.sensors.Keyboard;
 import app.ui.sensors.Mouse;
+import utils.cfg.CFGPropertyReader;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class Window extends JPanel implements AppWindow {
     private JFrame frame;
@@ -28,6 +33,11 @@ public class Window extends JPanel implements AppWindow {
 
     public boolean PRESSURE;
     public boolean VECTORS;
+
+    public int currentBackground = 0;
+    public int backgroundCount = 4;
+
+    public BufferedImage backgroundImage;
 
     public Brush brush;
 
@@ -58,11 +68,51 @@ public class Window extends JPanel implements AppWindow {
         THREADED = false;
         ERASER = true;
         PRESSURE = false;
+
+        backgroundCount = new File("ParticleSimulation/config/backgrounds").listFiles().length;
+
+        backgroundImage = null;
+
+        String[] syntax = {
+                "background_image",
+                "gravity"
+        };
+
+        String filename = String.format("%s%d.cfg", "ParticleSimulation/config/backgrounds/background_", 1);
+
+        File file = new File(filename);
+
+        if (file.exists()) {
+            String backgroundAddress = CFGPropertyReader.readString(file, syntax, 0);
+
+            try {
+                backgroundImage = ImageIO.read(new File(backgroundAddress));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            double gravity = CFGPropertyReader.readDouble(file, syntax, 1);
+
+//            simulation.globalForces.clear();
+//            simulation.globalForces.add(new Vec2(0, gravity));
+        }
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+
+        if (backgroundImage != null) {
+            g.drawImage(backgroundImage, 0, 0, null);
+        }else{
+            g.setColor(new Color(0, 20, 40));
+            g.setColor(new Color(0, 20, 40));
+            g.fillRect(0, 0, 1920, 1080);
+        }
+
+        g.setColor(new Color(0, 20, 40));
+
+        g.fillRect(0, 1000, 1920, 1080 - 1000);
 
         long millis1 = System.currentTimeMillis();
 
