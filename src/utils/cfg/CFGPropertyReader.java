@@ -1,6 +1,7 @@
 package utils.cfg;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
@@ -50,10 +51,12 @@ public class CFGPropertyReader {
     }
 
     public static String readString(File file, String[] syntax, int desired) {
+        String path = file.getPath();
+
         Scanner scanner = null;
 
         try {
-            scanner = new Scanner(file);
+            scanner = new Scanner(new FileInputStream(path), "UTF-8");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

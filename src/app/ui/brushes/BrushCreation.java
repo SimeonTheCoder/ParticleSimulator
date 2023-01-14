@@ -5,6 +5,7 @@ import app.ui.AppWindow;
 import app.ui.sensors.actions.ActionCode;
 import app.ui.sensors.actions.Actions;
 import utils.cfg.CFGPropertyReader;
+import utils.lang.LANGTranslate;
 
 import javax.swing.*;
 import java.awt.*;
@@ -58,58 +59,58 @@ public class BrushCreation implements AppWindow {
 
         panel.setBackground(new Color(0, 20, 40));
 
-        JLabel attractionLabelRadius = new JLabel("Attraction radius:");
+        JLabel attractionLabelRadius = new JLabel(LANGTranslate.translate("Attraction radius"));
         attRadius = new JTextField(10);
         attractionLabelRadius.setForeground(new Color(250, 128, 26));
         attRadius.setForeground(new Color(250, 128, 26));
         attRadius.setBackground(new Color(0, 20, 40));
 
-        JLabel attractionLabelStrength = new JLabel("Attraction strength:");
+        JLabel attractionLabelStrength = new JLabel(LANGTranslate.translate("Attraction strength"));
         attForce = new JTextField(10);
         attractionLabelStrength.setForeground(new Color(250, 128, 26));
         attForce.setForeground(new Color(250, 128, 26));
         attForce.setBackground(new Color(0, 20, 40));
 
-        JLabel repulsionLabelRadius = new JLabel("Repulsion radius:");
+        JLabel repulsionLabelRadius = new JLabel(LANGTranslate.translate("Repulsion radius"));
         repRadius = new JTextField(10);
         repulsionLabelRadius.setForeground(new Color(250, 128, 26));
         repRadius.setForeground(new Color(250, 128, 26));
         repRadius.setBackground(new Color(0, 20, 40));
 
-        JLabel repulsionLabelStrength = new JLabel("Repulsion strength:");
+        JLabel repulsionLabelStrength = new JLabel(LANGTranslate.translate("Repulsion strength"));
         repForce = new JTextField(10);
         repulsionLabelStrength.setForeground(new Color(250, 128, 26));
         repForce.setForeground(new Color(250, 128, 26));
         repForce.setBackground(new Color(0, 20, 40));
 
-        JLabel gravityLabel = new JLabel("Gravity");
+        JLabel gravityLabel = new JLabel(LANGTranslate.translate("Gravity"));
         gravity = new JCheckBox();
         gravityLabel.setForeground(new Color(250, 128, 26));
         gravityLabel.setBackground(new Color(0, 20, 40));
 
-        JLabel partitionLabel = new JLabel("Partition");
+        JLabel partitionLabel = new JLabel(LANGTranslate.translate("Partition"));
         partitionLabel.setForeground(new Color(250, 128, 26));
         partitionLabel.setBackground(new Color(0, 20, 40));
         partition = new JCheckBox();
 
-        JLabel movableLabel = new JLabel("Movable");
+        JLabel movableLabel = new JLabel(LANGTranslate.translate("Movable"));
         movableLabel.setForeground(new Color(250, 128, 26));
         movableLabel.setBackground(new Color(0, 20, 40));
         movable = new JCheckBox();
 
-        JLabel massLabel = new JLabel("Mass:");
+        JLabel massLabel = new JLabel(LANGTranslate.translate("Mass"));
         mass = new JTextField(10);
         massLabel.setForeground(new Color(250, 128, 26));
         mass.setForeground(new Color(250, 128, 26));
         mass.setBackground(new Color(0, 20, 40));
 
-        JLabel groupLabel = new JLabel("Group = ");
+        JLabel groupLabel = new JLabel(LANGTranslate.translate("Group"));
         group = new JTextField(10);
         groupLabel.setForeground(new Color(250, 128, 26));
         group.setForeground(new Color(250, 128, 26));
         group.setBackground(new Color(0, 20, 40));
 
-        JLabel countLabel = new JLabel("Count = ");
+        JLabel countLabel = new JLabel(LANGTranslate.translate("Count"));
         count = new JTextField(10);
         countLabel.setForeground(new Color(250, 128, 26));
         count.setForeground(new Color(250, 128, 26));
@@ -183,7 +184,7 @@ public class BrushCreation implements AppWindow {
             }
         }
 
-        JButton createBrush = new JButton(" - Create brush - ");
+        JButton createBrush = new JButton(LANGTranslate.translate("Create brush"));
         createBrush.addActionListener(new Actions(ActionCode.BRUSH_CREATE_SUBMIT, this));
 
         panel.add(separator);

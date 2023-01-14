@@ -3,6 +3,7 @@ package app.ui.hub;
 import app.ui.AppWindow;
 import app.ui.sensors.actions.ActionCode;
 import app.ui.sensors.actions.Actions;
+import utils.lang.LANGTranslate;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -30,13 +31,13 @@ public class Hub implements AppWindow {
         JLabel icon = new JLabel(imageIcon);
         panel.add(icon);
 
-        JButton simulationButton = new JButton("Simulation");
+        JButton simulationButton = new JButton(LANGTranslate.translate("Simulation"));
         simulationButton.addActionListener(new Actions(ActionCode.SIMULATION_WINDOW, this));
 
-        JButton aboutButton = new JButton("About");
+        JButton aboutButton = new JButton(LANGTranslate.translate("About"));
         aboutButton.addActionListener(new Actions(ActionCode.ABOUT_INFO, this));
 
-        JButton platformButton = new JButton("Manage Simulations");
+        JButton platformButton = new JButton(LANGTranslate.translate("Manage"));
         platformButton.addActionListener(new Actions(ActionCode.PLATFORM_OPEN, this));
 
         simulationButton.setBackground(new Color(250, 188, 26));

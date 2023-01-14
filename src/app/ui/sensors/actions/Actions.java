@@ -6,6 +6,7 @@ import app.math.Vec2;
 import app.rendering.Renderer;
 import app.ui.*;
 import app.ui.brushes.BrushCreation;
+import utils.lang.LANGTranslate;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -40,7 +41,7 @@ public class Actions implements ActionListener {
 
                 simulation.globalForces.add(new Vec2(0, 9.8 / 100.0));
 
-                Window window = new Window("Particle Simulation", 1000,
+                Window window = new Window(LANGTranslate.translate("Simulation"), 1000,
                         1000, renderer);
 
                 window.ITERATIONS = 1;
@@ -65,7 +66,7 @@ public class Actions implements ActionListener {
             }
 
             case SIMULATION_SAVE: {
-                PopUp popUp = new PopUp("Save Name", (Ui) window);
+                PopUp popUp = new PopUp(LANGTranslate.translate("File name"), (Ui) window);
 
                 popUp.setActionCode(ActionCode.SIMULATION_SAVE);
                 popUp.frame.setSize(500, 100);
@@ -74,7 +75,7 @@ public class Actions implements ActionListener {
             }
 
             case SIMULATION_LOAD: {
-                PopUp popUp = new PopUp("File name", (Ui) window);
+                PopUp popUp = new PopUp(LANGTranslate.translate("File name"), (Ui) window);
 
                 popUp.setActionCode(ActionCode.SIMULATION_LOAD);
                 popUp.frame.setSize(500, 100);
@@ -163,9 +164,9 @@ public class Actions implements ActionListener {
             case ABOUT_INFO: {
                 JDialog dialog = new JDialog();
 
-                dialog.setTitle("About SEPience");
+                dialog.setTitle(LANGTranslate.translate("About"));
 
-                dialog.getContentPane().add(new JLabel("About v0.2: Created by Simeon Petkov, Copyright 2023"));
+                dialog.getContentPane().add(new JLabel(LANGTranslate.translate("About v0.2: Created by Simeon Petkov, Copyright 2023")));
 
                 dialog.setSize(400, 100);
 

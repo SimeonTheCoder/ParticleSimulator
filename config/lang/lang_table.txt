@@ -1,0 +1,24 @@
+hub.title -> Hub
+hub.simulation -> Simulation
+hub.about -> About
+hub.manage_sims -> Manage
+pop_up.submit -> Submit
+about.title -> About
+about.text -> About v0.2: Created by Simeon Petkov, Copyright 2023
+sim.title -> Simulation
+ui.pop_up.save -> Save
+ui.pop_up.load -> Load
+ui.pop_up.save.prompt -> File name
+ui.pop_up.load.prompt -> File name
+brush.create.title -> Create brush
+brush.create.att_rad -> Attraction radius
+brush.create.att_str -> Attraction strength
+brush.create.rep_rad -> Repulsion radius
+brush.create.rep_str -> Repulsion strength
+brush.create.grav -> Gravity
+brush.create.part -> Partition
+brush.create.mov -> Movable
+brush.create.mass -> Mass
+brush.create.group -> Group
+brush.create.count -> Count
+brush.create.create -> Create Brush
