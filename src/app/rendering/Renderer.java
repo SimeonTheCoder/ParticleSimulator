@@ -54,6 +54,8 @@ public class Renderer {
     public void render(Graphics2D g, Simulation simulation, boolean PRESSURE, boolean VECTORS) {
         time++;
 
+        int densitySum = 0;
+
         if (PRESSURE) {
             values = new int[1000][1000];
 
@@ -82,11 +84,16 @@ public class Renderer {
                 for (int j = 0; j < 1000; j += 5) {
                     int br = Math.max(0, Math.min(255, values[i][j]));
 
+                    densitySum += values[i][j] / 25.0;
+
                     g.setColor(new Color(br, br, br));
 
                     g.fillRect(j, i, 5, 5);
                 }
             }
+
+            g.setColor(Color.BLUE);
+            g.drawString(String.valueOf(densitySum / (1000.0 * 1000.0)), 20, 100);
         } else {
             for (Particle particle : simulation.particles) {
                 if (!particle.active) continue;
