@@ -164,11 +164,11 @@ public class Window extends JPanel implements AppWindow {
 
         long millis2 = System.currentTimeMillis();
 
-        g.setColor(Color.BLUE);
-        g.drawString(String.valueOf(1 / ((millis2 - millis1) + .0) * 1000), 20, 40);
+//        g.setColor(Color.BLUE);
+//        g.drawString(String.valueOf(1 / ((millis2 - millis1) + .0) * 1000), 20, 40);
 
-        g.setColor(Color.PINK);
-        g.drawString(String.valueOf(simulation.particles.size()), 20, 80);
+//        g.setColor(Color.PINK);
+//        g.drawString(String.valueOf(simulation.particles.size()), 20, 80);
     }
 
     @Override

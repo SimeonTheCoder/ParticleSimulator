@@ -103,15 +103,24 @@ public class Renderer {
                 g.setColor(Color.RED);
 
                 if (sprites[particle.group] != null) {
-                    if(particle.group == 4) {
+                    if (particle.group == 4) {
                         g.drawImage(sprites[particle.group], (int) (particle.pos.x), (int) (particle.pos.y), 10, 10, null);
-                    }else {
-                        g.drawImage(sprites[particle.group], (int) (particle.pos.x - closestDistance * 2), (int) (particle.pos.y - closestDistance * 2),
-                                closestDistance * 4, closestDistance * 4, null);
+                    } else {
+                        for (int i = 0; i < 5; i++) {
+                            g.drawImage(sprites[particle.group], (int) (particle.pos.x - closestDistance * 2 - particle.vel.x * i), (int) (particle.pos.y - closestDistance * 2 - particle.vel.y * i),
+                                    closestDistance * 4, closestDistance * 4, null);
+                        }
                     }
                 } else {
-                    g.fillOval((int) ((int) particle.pos.x - closestDistance),
-                            (int) ((int) particle.pos.y - closestDistance),
+//                    double br = (particle.vel.length() / 20.0);
+//                    br = Math.max(0, Math.min(1, br));
+//
+//                    Color c = Color.getHSBColor((float) br, 1.0f, 1.0f);
+//
+//                    g.setColor(new Color(c.getRed(), c.getGreen(), c.getBlue(), 20));
+
+                    g.fillOval((int) particle.pos.x - closestDistance,
+                            (int) particle.pos.y - closestDistance,
                             closestDistance * 2, closestDistance * 2);
                 }
 
