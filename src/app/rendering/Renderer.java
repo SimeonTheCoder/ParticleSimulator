@@ -51,7 +51,7 @@ public class Renderer {
     public static boolean DEBUG = true;
     private Random random;
 
-    public void render(Graphics2D g, Simulation simulation, boolean PRESSURE, boolean VECTORS) {
+    public void render(Graphics2D g, Simulation simulation, boolean PRESSURE, boolean VECTORS, boolean SPECTRUM) {
         time++;
 
         int densitySum = 0;
@@ -94,7 +94,7 @@ public class Renderer {
 
             g.setColor(Color.BLUE);
             g.drawString(String.valueOf(densitySum / (1000.0 * 1000.0)), 20, 100);
-        } else {
+        } else if (!SPECTRUM) {
             for (Particle particle : simulation.particles) {
                 if (!particle.active) continue;
 
@@ -106,23 +106,36 @@ public class Renderer {
                     if (particle.group == 4) {
                         g.drawImage(sprites[particle.group], (int) (particle.pos.x), (int) (particle.pos.y), 10, 10, null);
                     } else {
-                        for (int i = 0; i < 5; i++) {
-                            g.drawImage(sprites[particle.group], (int) (particle.pos.x - closestDistance * 2 - particle.vel.x * i), (int) (particle.pos.y - closestDistance * 2 - particle.vel.y * i),
-                                    closestDistance * 4, closestDistance * 4, null);
-                        }
+                        g.drawImage(sprites[particle.group], (int) (particle.pos.x - closestDistance * 2), (int) (particle.pos.y - closestDistance * 2),
+                                closestDistance * 4, closestDistance * 4, null);
                     }
                 } else {
-//                    double br = (particle.vel.length() / 20.0);
-//                    br = Math.max(0, Math.min(1, br));
-//
-//                    Color c = Color.getHSBColor((float) br, 1.0f, 1.0f);
-//
-//                    g.setColor(new Color(c.getRed(), c.getGreen(), c.getBlue(), 20));
-
                     g.fillOval((int) particle.pos.x - closestDistance,
                             (int) particle.pos.y - closestDistance,
                             closestDistance * 2, closestDistance * 2);
                 }
+
+                if (VECTORS) {
+                    g.drawLine((int) particle.pos.x, (int) particle.pos.y,
+                            (int) (particle.pos.x + particle.vel.x * 3), (int) (particle.pos.y + particle.vel.y * 3));
+                }
+            }
+        } else {
+            for (Particle particle : simulation.particles) {
+                if (!particle.active) continue;
+
+                int closestDistance = 30 - Math.max(15, (int) (particle.closestDistance));
+
+                double br = (particle.vel.length() / 20.0);
+                br = Math.max(0, Math.min(1, br));
+
+                Color c = Color.getHSBColor((float) br, 1.0f, 1.0f);
+
+                g.setColor(new Color(c.getRed(), c.getGreen(), c.getBlue()));
+
+                g.fillOval((int) particle.pos.x - closestDistance,
+                        (int) particle.pos.y - closestDistance,
+                        closestDistance * 2, closestDistance * 2);
 
                 if (VECTORS) {
                     g.drawLine((int) particle.pos.x, (int) particle.pos.y,

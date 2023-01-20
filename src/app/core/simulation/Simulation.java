@@ -29,7 +29,7 @@ public class Simulation {
 
         finished = new boolean[THREAD_COUNT];
 
-        for(int i = 0; i < THREAD_COUNT; i ++) {
+        for (int i = 0; i < THREAD_COUNT; i++) {
             finished[i] = false;
 
             threads.add(new SimulationThread(i, particles, globalForces));
@@ -44,25 +44,25 @@ public class Simulation {
         for (Particle particle : particles) {
             particle.closestDistance = 30;
 
-            if(!particle.active) continue;
+            if (!particle.active) continue;
 
-            if(particle.pos.x < 0) {
+            if (particle.pos.x < 0) {
                 particle.pos.x = 0;
                 particle.vel.x *= -1 * particle.fric;
             }
 
-            if(particle.pos.x > 1000) {
+            if (particle.pos.x > 1000) {
 //                particle.active = false;
                 particle.pos.x = 1000;
                 particle.vel.x *= -1 * particle.fric;
             }
 
-            if(particle.pos.y < 0) {
+            if (particle.pos.y < 0) {
                 particle.pos.y = 0;
                 particle.vel.y *= -1 * particle.fric;
             }
 
-            if(particle.pos.y > 1000) {
+            if (particle.pos.y > 1000) {
                 particle.pos.y = 1000;
                 particle.vel.y *= -1 * particle.fric;
             }
@@ -79,7 +79,7 @@ public class Simulation {
 
                 double dis = dvec.length();
 
-                if(!((Double) dis).isNaN()) {
+                if (!((Double) dis).isNaN()) {
                     particle.closestDistance = Math.max(5, Math.min(particle.closestDistance, dis));
                 }
 
@@ -103,7 +103,7 @@ public class Simulation {
 
 //            System.out.println();
 
-            if(particle.grav) {
+            if (particle.grav) {
                 for (Vec2 globalForce : globalForces) {
                     particle.vel.add(globalForce);
                 }
@@ -117,7 +117,7 @@ public class Simulation {
         SimulationThread.paused = false;
 
         for (SimulationThread thread : threads) {
-            if(!thread.isAlive()) {
+            if (!thread.isAlive()) {
                 thread = new SimulationThread(thread.threadIndex, particles, globalForces);
 
                 thread.start();

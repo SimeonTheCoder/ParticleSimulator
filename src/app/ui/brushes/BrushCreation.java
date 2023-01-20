@@ -2,6 +2,7 @@ package app.ui.brushes;
 
 import app.math.Vec2;
 import app.ui.AppWindow;
+import app.ui.color.Palette;
 import app.ui.sensors.actions.ActionCode;
 import app.ui.sensors.actions.Actions;
 import utils.cfg.CFGPropertyReader;
@@ -57,64 +58,64 @@ public class BrushCreation implements AppWindow {
 
         JPanel panel = new JPanel();
 
-        panel.setBackground(new Color(0, 20, 40));
+        panel.setBackground(Palette.secondaryColor);
 
         JLabel attractionLabelRadius = new JLabel(LANGTranslate.translate("Attraction radius"));
         attRadius = new JTextField(10);
-        attractionLabelRadius.setForeground(new Color(250, 128, 26));
-        attRadius.setForeground(new Color(250, 128, 26));
-        attRadius.setBackground(new Color(0, 20, 40));
+        attractionLabelRadius.setForeground(Palette.primaryColor);
+        attRadius.setForeground(Palette.primaryColor);
+        attRadius.setBackground(Palette.secondaryColor);
 
         JLabel attractionLabelStrength = new JLabel(LANGTranslate.translate("Attraction strength"));
         attForce = new JTextField(10);
-        attractionLabelStrength.setForeground(new Color(250, 128, 26));
-        attForce.setForeground(new Color(250, 128, 26));
-        attForce.setBackground(new Color(0, 20, 40));
+        attractionLabelStrength.setForeground(Palette.primaryColor);
+        attForce.setForeground(Palette.primaryColor);
+        attForce.setBackground(Palette.secondaryColor);
 
         JLabel repulsionLabelRadius = new JLabel(LANGTranslate.translate("Repulsion radius"));
         repRadius = new JTextField(10);
-        repulsionLabelRadius.setForeground(new Color(250, 128, 26));
-        repRadius.setForeground(new Color(250, 128, 26));
-        repRadius.setBackground(new Color(0, 20, 40));
+        repulsionLabelRadius.setForeground(Palette.primaryColor);
+        repRadius.setForeground(Palette.primaryColor);
+        repRadius.setBackground(Palette.secondaryColor);
 
         JLabel repulsionLabelStrength = new JLabel(LANGTranslate.translate("Repulsion strength"));
         repForce = new JTextField(10);
-        repulsionLabelStrength.setForeground(new Color(250, 128, 26));
-        repForce.setForeground(new Color(250, 128, 26));
-        repForce.setBackground(new Color(0, 20, 40));
+        repulsionLabelStrength.setForeground(Palette.primaryColor);
+        repForce.setForeground(Palette.primaryColor);
+        repForce.setBackground(Palette.secondaryColor);
 
         JLabel gravityLabel = new JLabel(LANGTranslate.translate("Gravity"));
         gravity = new JCheckBox();
-        gravityLabel.setForeground(new Color(250, 128, 26));
-        gravityLabel.setBackground(new Color(0, 20, 40));
+        gravityLabel.setForeground(Palette.primaryColor);
+        gravityLabel.setBackground(Palette.secondaryColor);
 
         JLabel partitionLabel = new JLabel(LANGTranslate.translate("Partition"));
-        partitionLabel.setForeground(new Color(250, 128, 26));
-        partitionLabel.setBackground(new Color(0, 20, 40));
+        partitionLabel.setForeground(Palette.primaryColor);
+        partitionLabel.setBackground(Palette.secondaryColor);
         partition = new JCheckBox();
 
         JLabel movableLabel = new JLabel(LANGTranslate.translate("Movable"));
-        movableLabel.setForeground(new Color(250, 128, 26));
-        movableLabel.setBackground(new Color(0, 20, 40));
+        movableLabel.setForeground(Palette.primaryColor);
+        movableLabel.setBackground(Palette.secondaryColor);
         movable = new JCheckBox();
 
         JLabel massLabel = new JLabel(LANGTranslate.translate("Mass"));
         mass = new JTextField(10);
-        massLabel.setForeground(new Color(250, 128, 26));
-        mass.setForeground(new Color(250, 128, 26));
-        mass.setBackground(new Color(0, 20, 40));
+        massLabel.setForeground(Palette.primaryColor);
+        mass.setForeground(Palette.primaryColor);
+        mass.setBackground(Palette.secondaryColor);
 
         JLabel groupLabel = new JLabel(LANGTranslate.translate("Group"));
         group = new JTextField(10);
-        groupLabel.setForeground(new Color(250, 128, 26));
-        group.setForeground(new Color(250, 128, 26));
-        group.setBackground(new Color(0, 20, 40));
+        groupLabel.setForeground(Palette.primaryColor);
+        group.setForeground(Palette.primaryColor);
+        group.setBackground(Palette.secondaryColor);
 
         JLabel countLabel = new JLabel(LANGTranslate.translate("Count"));
         count = new JTextField(10);
-        countLabel.setForeground(new Color(250, 128, 26));
-        count.setForeground(new Color(250, 128, 26));
-        count.setBackground(new Color(0, 20, 40));
+        countLabel.setForeground(Palette.primaryColor);
+        count.setForeground(Palette.primaryColor);
+        count.setBackground(Palette.secondaryColor);
 
         panel.add(attractionLabelRadius);
         panel.add(attRadius);
@@ -177,8 +178,8 @@ public class BrushCreation implements AppWindow {
                 JButton presetButton = new JButton(presetTitle);
                 presetButton.addActionListener(new Actions(ActionCode.PRESET_USED, this, i));
 
-                presetButton.setBackground(new Color(0, 20, 40));
-                presetButton.setForeground(new Color(250, 128, 26));
+                presetButton.setBackground(Palette.secondaryColor);
+                presetButton.setForeground(Palette.primaryColor);
 
                 panel.add(presetButton);
             }

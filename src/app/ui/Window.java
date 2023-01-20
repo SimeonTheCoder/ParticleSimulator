@@ -21,7 +21,7 @@ import java.io.IOException;
 public class Window extends JPanel implements AppWindow {
     private JFrame frame;
     private Renderer renderer;
-    private KeyHandler handler;
+    public KeyHandler handler;
 
     public Simulation simulation;
     public int ITERATIONS;
@@ -33,6 +33,7 @@ public class Window extends JPanel implements AppWindow {
 
     public boolean PRESSURE;
     public boolean VECTORS;
+    public boolean SPECTRUM;
 
     public int currentBackground = 0;
     public int backgroundCount = 4;
@@ -104,7 +105,7 @@ public class Window extends JPanel implements AppWindow {
 
         if (backgroundImage != null) {
             g.drawImage(backgroundImage, 0, 0, null);
-        }else{
+        } else {
             g.setColor(new Color(0, 20, 40));
             g.setColor(new Color(0, 20, 40));
             g.fillRect(0, 0, 1920, 1080);
@@ -140,7 +141,7 @@ public class Window extends JPanel implements AppWindow {
             }
         }
 
-        renderer.render((Graphics2D) g, simulation, PRESSURE, VECTORS);
+        renderer.render((Graphics2D) g, simulation, PRESSURE, VECTORS, SPECTRUM);
 
         g.setColor(new Color(250, 180, 26));
         g.fillRect((int) selector.x, (int) selector.y, 10, 10);

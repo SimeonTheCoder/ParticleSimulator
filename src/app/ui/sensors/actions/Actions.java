@@ -149,6 +149,12 @@ public class Actions implements ActionListener {
                 break;
             }
 
+            case VIEW_SPECTRUM: {
+                ((Ui) window).window.SPECTRUM = !((Ui) window).window.SPECTRUM;
+
+                break;
+            }
+
             case VIEW_VECTORS: {
                 ((Ui) window).window.VECTORS = !((Ui) window).window.VECTORS;
 
@@ -166,7 +172,7 @@ public class Actions implements ActionListener {
 
                 dialog.setTitle(LANGTranslate.translate("About"));
 
-                dialog.getContentPane().add(new JLabel(LANGTranslate.translate("About v0.2: Created by Simeon Petkov, Copyright 2023")));
+                dialog.getContentPane().add(new JLabel(LANGTranslate.translate("About v0.3: Created by Simeon Petkov, Copyright 2023")));
 
                 dialog.setSize(400, 100);
 
@@ -192,6 +198,12 @@ public class Actions implements ActionListener {
 
             case PLATFORM_OPEN: {
                 Launcher launcher = new Launcher();
+
+                break;
+            }
+
+            case CHANGE_BACKGROUND: {
+                ((Ui) window).window.handler.handle(17, ((Ui) window).window);
 
                 break;
             }
