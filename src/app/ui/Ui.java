@@ -85,11 +85,19 @@ public class Ui implements AppWindow {
         threadsButton.setFont(threadsButton.getFont().deriveFont(30, 30));
         threadsButton.setBorder(new LineBorder(Palette.secondaryColor, 15, true));
 
+        JButton spritesButton = new JButton("👁");
+        spritesButton.addActionListener(new Actions(ActionCode.ENABLE_SPRITES, this));
+        spritesButton.setFont(threadsButton.getFont().deriveFont(30, 30));
+        spritesButton.setBorder(new LineBorder(Palette.secondaryColor, 15, true));
+
         saveButton.setBackground(Palette.secondaryColor);
         loadButton.setBackground(Palette.secondaryColor);
 
         saveButton.setForeground(Palette.primaryColor);
         loadButton.setForeground(Palette.primaryColor);
+
+        spritesButton.setForeground(Palette.primaryColor);
+        spritesButton.setBackground(Palette.secondaryColor);
 
         panel.add(saveButton);
         panel.add(loadButton);
@@ -154,6 +162,8 @@ public class Ui implements AppWindow {
         panel.add(backgroundButton);
 
         panel.add(threadsButton);
+
+        panel.add(spritesButton);
 
         frame.add(panel);
 

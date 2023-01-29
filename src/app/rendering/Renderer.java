@@ -51,7 +51,7 @@ public class Renderer {
     public static boolean DEBUG = true;
     private Random random;
 
-    public void render(Graphics2D g, Simulation simulation, boolean PRESSURE, boolean VECTORS, boolean SPECTRUM) {
+    public void render(Graphics2D g, Simulation simulation, boolean PRESSURE, boolean VECTORS, boolean SPECTRUM, boolean SPRITES) {
         time++;
 
         int densitySum = 0;
@@ -100,9 +100,7 @@ public class Renderer {
 
                 int closestDistance = 30 - Math.max(15, (int) (particle.closestDistance));
 
-                g.setColor(Color.RED);
-
-                if (sprites[particle.group] != null) {
+                if (sprites[particle.group] != null && SPRITES) {
                     if (particle.group == 4) {
                         g.drawImage(sprites[particle.group], (int) (particle.pos.x), (int) (particle.pos.y), 10, 10, null);
                     } else {
@@ -110,10 +108,17 @@ public class Renderer {
                                 closestDistance * 4, closestDistance * 4, null);
                     }
                 } else {
-                    g.fillOval((int) particle.pos.x - closestDistance,
-                            (int) particle.pos.y - closestDistance,
-                            closestDistance * 2, closestDistance * 2);
+                    if (particle.group == 1) g.setColor(Color.RED);
+                    if (particle.group == 2) g.setColor(Color.BLUE);
+                    if (particle.group == 3) g.setColor(Color.GREEN);
+
+                    g.fillOval((int) particle.pos.x,
+                            (int) particle.pos.y,
+                            10, 10);
                 }
+
+                g.setColor(Color.RED);
+                g.setStroke(new BasicStroke(3));
 
                 if (VECTORS) {
                     g.drawLine((int) particle.pos.x, (int) particle.pos.y,

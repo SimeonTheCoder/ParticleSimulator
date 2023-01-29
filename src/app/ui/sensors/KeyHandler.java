@@ -261,6 +261,12 @@ public class KeyHandler {
                     window.simulation.globalForces.add(new Vec2(0, gravity / 100));
                 }
             }
+
+            case 18: {
+                window.SPRITES = !window.SPRITES;
+
+                break;
+            }
         }
     }
 }

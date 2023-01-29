@@ -12,11 +12,18 @@ public class LANGTranslate {
     private static String langAddress = "en.lang";
     private static final String LANG_TABLE_ADDRESS = "ParticleSimulation/config/lang/";
 
-    public static void init() {
-        langAddress = CFGPropertyReader.readString(new File(LANG_TABLE_ADDRESS + "lang.cfg"), new String[]{"current"}, 0);
-    }
+    private static String[] syntaxTable;
+    private static String[] originalTable;
 
-    public static String translate(String str) {
+    private static File langFile;
+
+    public static void init() {
+        List<String> langList = new ArrayList<>();
+
+        langAddress = CFGPropertyReader.readString(new File(LANG_TABLE_ADDRESS + "lang.cfg"), new String[]{"current"}, 0);
+
+        langFile = new File(LANG_TABLE_ADDRESS + langAddress + ".lang");
+
         File langTable = new File(LANG_TABLE_ADDRESS + "lang_table.txt");
 
         Scanner scanner = null;
@@ -27,45 +34,36 @@ public class LANGTranslate {
             throw new RuntimeException(e);
         }
 
-        String referenceName = "";
-
-        List<String> stringList = new ArrayList<>();
-
-        int desiredId = 0;
-        int id = 0;
-
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
 
-            String original = line.split(" -> ")[1];
+            langList.add(line.split(" -> ")[0] + "$" + line.split(" -> ")[1]);
+        }
 
-            stringList.add(line.split(" -> ")[0]);
+        syntaxTable = new String[langList.size()];
+        originalTable = new String[langList.size()];
+
+        for (int i = 0; i < langList.size(); i++) {
+            syntaxTable[i] = langList.get(i).split("\\$")[0];
+            originalTable[i] = langList.get(i).split("\\$")[1];
+        }
+    }
+
+    public static String translate(String str) {
+        int desiredId = 0;
+
+        for (int i = 0; i < originalTable.length; i++) {
+            String original = originalTable[i];
 
             if (original.equals(str)) {
-                referenceName = line.split(" -> ")[0];
-
-                desiredId = id;
+                desiredId = i;
 
                 break;
             }
-
-            id++;
         }
 
-        String[] syntaxTable = new String[stringList.size()];
+        String converted = CFGPropertyReader.readString(langFile, syntaxTable, desiredId);
 
-        for (int i = 0; i < stringList.size(); i++) {
-            syntaxTable[i] = stringList.get(i);
-        }
-
-        File file = new File(LANG_TABLE_ADDRESS + langAddress + ".lang");
-
-        String converted = CFGPropertyReader.readString(file, syntaxTable, desiredId);
-
-//        if (converted == null) {
         return converted;
-//        } else {
-//            return "NULL";
-//        }
     }
 }

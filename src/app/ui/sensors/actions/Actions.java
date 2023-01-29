@@ -207,6 +207,12 @@ public class Actions implements ActionListener {
 
                 break;
             }
+
+            case ENABLE_SPRITES: {
+                ((Ui) window).window.handler.handle(18, ((Ui) window).window);
+
+                break;
+            }
         }
     }
 }
