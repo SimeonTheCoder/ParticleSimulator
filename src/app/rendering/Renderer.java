@@ -117,10 +117,10 @@ public class Renderer {
                             10, 10);
                 }
 
-                g.setColor(Color.RED);
-                g.setStroke(new BasicStroke(3));
-
                 if (VECTORS) {
+                    g.setColor(Color.RED);
+                    g.setStroke(new BasicStroke(3));
+
                     g.drawLine((int) particle.pos.x, (int) particle.pos.y,
                             (int) (particle.pos.x + particle.vel.x * 3), (int) (particle.pos.y + particle.vel.y * 3));
                 }

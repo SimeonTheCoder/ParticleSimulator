@@ -17,21 +17,13 @@ public class Simulation {
         this.particles = particles;
     }
 
-    public static boolean[] finished;
-
     public Simulation() {
         particles = new ArrayList<>();
         globalForces = new ArrayList<>();
 
         threads = new ArrayList<>();
 
-        SimulationThread.paused = true;
-
-        finished = new boolean[THREAD_COUNT];
-
         for (int i = 0; i < THREAD_COUNT; i++) {
-            finished[i] = false;
-
             threads.add(new SimulationThread(i, particles, globalForces));
             threads.get(i).THREAD_COUNT = THREAD_COUNT;
             threads.get(i).start();
@@ -39,7 +31,9 @@ public class Simulation {
     }
 
     public void step() {
-        SimulationThread.paused = true;
+        for (SimulationThread thread : threads) {
+            thread.paused = true;
+        }
 
         for (Particle particle : particles) {
             particle.closestDistance = 30;
@@ -101,8 +95,6 @@ public class Simulation {
 
             particle.cap();
 
-//            System.out.println();
-
             if (particle.grav) {
                 for (Vec2 globalForce : globalForces) {
                     particle.vel.add(globalForce);
@@ -114,13 +106,19 @@ public class Simulation {
     }
 
     public void threadedStep() {
-        SimulationThread.paused = false;
-
         for (SimulationThread thread : threads) {
-            if (!thread.isAlive()) {
-                thread = new SimulationThread(thread.threadIndex, particles, globalForces);
+            thread.paused = false;
+        }
 
-                thread.start();
+        for (int i = 0; i < threads.size(); i++) {
+            if (!threads.get(i).isAlive()) {
+                SimulationThread newThread = new SimulationThread(threads.get(i).threadIndex, particles, globalForces);
+                newThread.paused = false;
+
+                newThread.start();
+
+                threads.remove(i);
+                threads.add(newThread);
             }
         }
     }

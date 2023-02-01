@@ -67,7 +67,7 @@ public class Window extends JPanel implements AppWindow {
         frame.setResizable(false);
 
         PAUSED = false;
-        THREADED = false;
+        THREADED = true;
         ERASER = true;
         PRESSURE = false;
         SPRITES = true;

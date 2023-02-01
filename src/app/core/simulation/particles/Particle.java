@@ -60,8 +60,6 @@ public class Particle {
     }
 
     public void cap() {
-        if(vel.length() == 0) return;
-
         double mag = vel.length();
 
         mag = Math.min(mag, speedCap);

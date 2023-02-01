@@ -3,7 +3,7 @@ package app.ui.brushes;
 import app.core.simulation.particles.Particle;
 import app.math.Vec2;
 
-public class BasicBrush implements Brush{
+public class BasicBrush implements Brush {
     private Particle instance;
     private int count;
 
