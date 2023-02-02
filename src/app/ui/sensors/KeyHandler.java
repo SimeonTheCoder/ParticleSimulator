@@ -260,6 +260,8 @@ public class KeyHandler {
                     window.simulation.globalForces.clear();
                     window.simulation.globalForces.add(new Vec2(0, gravity / 100));
                 }
+
+                break;
             }
 
             case 18: {
