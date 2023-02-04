@@ -213,6 +213,12 @@ public class Actions implements ActionListener {
 
                 break;
             }
+
+            case ENABLE_EXP_LIQUID: {
+                ((Ui) window).window.handler.handle(19, ((Ui) window).window);
+
+                break;
+            }
         }
     }
 }

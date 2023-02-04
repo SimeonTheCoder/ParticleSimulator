@@ -269,6 +269,12 @@ public class KeyHandler {
 
                 break;
             }
+
+            case 19: {
+                window.EXPERIMENTAL_LIQUIDS = !window.EXPERIMENTAL_LIQUIDS;
+
+                break;
+            }
         }
     }
 }

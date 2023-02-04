@@ -90,6 +90,11 @@ public class Ui implements AppWindow {
         spritesButton.setFont(threadsButton.getFont().deriveFont(30, 30));
         spritesButton.setBorder(new LineBorder(Palette.secondaryColor, 15, true));
 
+        JButton liquidButton = new JButton("\uD83C\uDF0A");
+        liquidButton.addActionListener(new Actions(ActionCode.ENABLE_EXP_LIQUID, this));
+        liquidButton.setFont(threadsButton.getFont().deriveFont(30, 30));
+        liquidButton.setBorder(new LineBorder(Palette.secondaryColor, 15, true));
+
         saveButton.setBackground(Palette.secondaryColor);
         loadButton.setBackground(Palette.secondaryColor);
 
@@ -98,6 +103,9 @@ public class Ui implements AppWindow {
 
         spritesButton.setForeground(Palette.primaryColor);
         spritesButton.setBackground(Palette.secondaryColor);
+
+        liquidButton.setForeground(Palette.primaryColor);
+        liquidButton.setBackground(Palette.secondaryColor);
 
         panel.add(saveButton);
         panel.add(loadButton);
@@ -164,6 +172,8 @@ public class Ui implements AppWindow {
         panel.add(threadsButton);
 
         panel.add(spritesButton);
+
+        panel.add(liquidButton);
 
         frame.add(panel);
 
