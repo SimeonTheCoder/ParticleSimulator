@@ -22,3 +22,4 @@ brush.create.mass = Маса
 brush.create.group = Група
 brush.create.count = Брой частици
 brush.create.create =  - Създайте четка -
+brush.create.cap = Макс.скорост

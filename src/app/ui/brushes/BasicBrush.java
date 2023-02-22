@@ -8,7 +8,7 @@ public class BasicBrush implements Brush {
     private int count;
 
     @Override
-    public void build(Vec2 att, Vec2 rep, boolean grav, boolean partition, boolean movable, double mass, double fric, int group, int count) {
+    public void build(Vec2 att, Vec2 rep, boolean grav, boolean partition, boolean movable, double mass, double fric, int group, int count, double speedCap) {
         Particle particle = new Particle();
 
         particle.att = att;
@@ -24,7 +24,7 @@ public class BasicBrush implements Brush {
         particle.vel = new Vec2(0, 0);
 
         particle.active = true;
-        particle.speedCap = 5;
+        particle.speedCap = speedCap;
 
         this.count = count;
 

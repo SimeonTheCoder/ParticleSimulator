@@ -22,3 +22,4 @@ brush.create.mass = Mass
 brush.create.group = Group
 brush.create.count = Count
 brush.create.create =  - Create Brush -
+brush.create.cap = Cap

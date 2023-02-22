@@ -160,6 +160,24 @@ public class Renderer {
             AffineTransformOp transformOp2 = new AffineTransformOp(transform2, AffineTransformOp.TYPE_BILINEAR);
 
             transformOp2.filter(image, result2);
+
+            for (int i = 0; i < 500; i++) {
+                for (int j = 0; j < 500; j++) {
+                    Color c = new Color(result2.getRGB(i, j));
+
+                    int alpha = result2.getRGB(i, j);
+                    alpha = (alpha >> 24) & 0xff;
+
+                    if (alpha > 0) {
+                        if (c.getRed() < 128) {
+                            c = new Color(c.getRed(), c.getGreen(), Math.max(0, Math.min(255, 255 - j * 5)), 255);
+                        }
+
+                        result2.setRGB(i, j, c.getRGB());
+                    }
+                }
+            }
+
             transformOp.filter(result2, result);
 
             g.drawImage(result, 0, 0, 1000, 1000, null);

@@ -27,7 +27,8 @@ public class BrushCreation implements AppWindow {
             "partition",
             "movable",
             "group",
-            "count"
+            "count",
+            "cap"
     };
 
     public JFrame frame;
@@ -46,13 +47,15 @@ public class BrushCreation implements AppWindow {
     private JCheckBox partition;
     private JCheckBox movable;
 
+    private JTextField speedCap;
+
     public BrushCreation(AppWindow window) {
         this.window = window;
 
         frame = new JFrame();
 
         frame.setTitle("SEPience");
-        frame.setSize(200, 500);
+        frame.setSize(200, 600);
 
         frame.setLocation(600, 300);
 
@@ -117,6 +120,12 @@ public class BrushCreation implements AppWindow {
         count.setForeground(Palette.primaryColor);
         count.setBackground(Palette.secondaryColor);
 
+        JLabel capLabel = new JLabel(LANGTranslate.translate("Cap"));
+        speedCap = new JTextField(10);
+        capLabel.setForeground(Palette.primaryColor);
+        speedCap.setForeground(Palette.primaryColor);
+        speedCap.setBackground(Palette.secondaryColor);
+
         panel.add(attractionLabelRadius);
         panel.add(attRadius);
 
@@ -146,6 +155,9 @@ public class BrushCreation implements AppWindow {
 
         panel.add(countLabel);
         panel.add(count);
+
+        panel.add(capLabel);
+        panel.add(speedCap);
 
         JSeparator separator = new JSeparator(SwingConstants.HORIZONTAL);
 
@@ -215,13 +227,14 @@ public class BrushCreation implements AppWindow {
                 Double.parseDouble(mass.getText()),
                 0.5,
                 Integer.parseInt(group.getText()),
-                Integer.parseInt(count.getText())
+                Integer.parseInt(count.getText()),
+                Double.parseDouble(speedCap.getText())
         );
 
         return brush;
     }
 
-    public void config(double attRadius, double attForce, double repRadius, double repForce, double mass, boolean grav, boolean part, boolean mov, int group, int count) {
+    public void config(double attRadius, double attForce, double repRadius, double repForce, double mass, boolean grav, boolean part, boolean mov, int group, int count, double speedCap) {
         this.attRadius.setText(String.valueOf(attRadius));
         this.attForce.setText(String.valueOf(attForce));
 
@@ -238,6 +251,7 @@ public class BrushCreation implements AppWindow {
         this.movable.setSelected(mov);
 
         this.count.setText(String.valueOf(count));
+        this.speedCap.setText(String.valueOf(speedCap));
     }
 
     public void parseFromFile(int index) {
@@ -266,7 +280,9 @@ public class BrushCreation implements AppWindow {
             int group = CFGPropertyReader.readInt(file, syntax, 8);
             int count = CFGPropertyReader.readInt(file, syntax, 9);
 
-            config(attForceRad, attForceVal, repForceRad, repForceVal, mass, grav, part, mov, group, count);
+            double speedCap = CFGPropertyReader.readDouble(file, syntax, 10);
+
+            config(attForceRad, attForceVal, repForceRad, repForceVal, mass, grav, part, mov, group, count, speedCap);
         }
     }
 }

@@ -22,24 +22,29 @@ public class Serialize {
             boolean has = false;
 
             for (Vec2 position : positions) {
-                if(particle.pos.x == position.x && particle.pos.y == position.y) {has = true; break;}
+                if (particle.pos.x == position.x && particle.pos.y == position.y) {
+                    has = true;
+                    break;
+                }
             }
 
-            if(has) particle.active = false;
+            if (has) particle.active = false;
 
             positions.add(particle.pos);
         }
 
         for (Particle particle : simulation.particles) {
-            if(particle.active) {
-                builder.append(String.format("%.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %s %.3f %d %s %s ",
+            if (particle.active) {
+                builder.append(String.format("%.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %s %.3f %d %s %s %.3f ",
                         particle.pos.x, particle.pos.y,
                         particle.vel.x, particle.vel.y,
                         particle.att.x, particle.att.y,
                         particle.rep.x, particle.rep.y,
                         particle.grav, particle.mass,
                         particle.group,
-                        particle.partition, particle.movable));
+                        particle.partition,
+                        particle.movable,
+                        particle.speedCap));
             }
         }
 
@@ -81,7 +86,7 @@ public class Serialize {
 
         String[] content = line.split(" ");
 
-        for(int i = 0; i < content.length; i += 13) {
+        for (int i = 0; i < content.length; i += 14) {
             try {
                 Particle particle = Particle.build()
                         .setPos(new Vec2(Double.parseDouble(content[0 + i]), Double.parseDouble(content[1 + i])))
@@ -92,10 +97,11 @@ public class Serialize {
                         .setMass(Double.parseDouble(content[9 + i]))
                         .setGroup(Integer.parseInt(content[10 + i]))
                         .setPartition(Boolean.parseBoolean(content[11 + i]))
-                        .setMovable(Boolean.parseBoolean(content[12 + i]));
+                        .setMovable(Boolean.parseBoolean(content[12 + i]))
+                        .setCap(Double.parseDouble(content[13 + i]));
 
                 simulation.particles.add(particle);
-            }catch (Exception exception) {
+            } catch (Exception exception) {
                 exception.printStackTrace();
             }
         }

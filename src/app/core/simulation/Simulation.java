@@ -56,8 +56,8 @@ public class Simulation {
                 particle.vel.y *= -1 * particle.fric;
             }
 
-            if (particle.pos.y > 1000) {
-                particle.pos.y = 1000;
+            if (particle.pos.y > 900) {
+                particle.pos.y = 900;
                 particle.vel.y *= -1 * particle.fric;
             }
 
