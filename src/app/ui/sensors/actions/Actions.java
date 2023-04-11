@@ -101,6 +101,30 @@ public class Actions implements ActionListener {
                 break;
             }
 
+            case PRESET_SOLID: {
+                ((BrushCreation) window).config(100, 3, 50, 1, 10, true, false, false, 1, 1);
+
+                break;
+            }
+
+            case PRESET_LIQUID: {
+                ((BrushCreation) window).config(100, 0.2, 50, 1, 3, true, false, false, 2, 1);
+
+                break;
+            }
+
+            case PRESET_GAS: {
+                ((BrushCreation) window).config(100, 0.1, 50, 10, 0.1, true, false, false, 3, 1);
+
+                break;
+            }
+
+            case PRESET_WALL: {
+                ((BrushCreation) window).config(0, 0.1, 30, 10, 10000, false, false, false, 4, 1);
+
+                break;
+            }
+
             case PRESET_USED: {
                 ((BrushCreation) window).parseFromFile(param);
 
@@ -186,12 +210,6 @@ public class Actions implements ActionListener {
 
             case ENABLE_SPRITES: {
                 ((Ui) window).window.handler.handle(18, ((Ui) window).window);
-
-                break;
-            }
-
-            case ENABLE_EXP_LIQUID: {
-                ((Ui) window).window.handler.handle(19, ((Ui) window).window);
 
                 break;
             }

@@ -50,8 +50,6 @@ public class LANGTranslate {
     }
 
     public static String translate(String str) {
-        System.out.println(str);
-
         int desiredId = 0;
 
         for (int i = 0; i < originalTable.length; i++) {

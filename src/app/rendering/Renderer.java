@@ -5,8 +5,6 @@ import app.core.simulation.particles.Particle;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +12,8 @@ import java.util.Random;
 
 public class Renderer {
     public int[][] values;
+
+    private int time = 0;
 
     public BufferedImage[] sprites;
 
@@ -44,14 +44,13 @@ public class Renderer {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        random = new Random();
     }
 
     public static boolean DEBUG = true;
-    private Random random;
 
-    public void render(Graphics2D g, Simulation simulation, boolean PRESSURE, boolean VECTORS, boolean SPECTRUM, boolean SPRITES, boolean EXPERIMENTAL_LIQUIDS) {
+    public void render(Graphics2D g, Simulation simulation, boolean PRESSURE, boolean VECTORS, boolean SPECTRUM, boolean SPRITES) {
+        time++;
+
         int densitySum = 0;
 
         if (PRESSURE) {
@@ -93,116 +92,76 @@ public class Renderer {
             g.setColor(Color.BLUE);
             g.drawString(String.valueOf(densitySum / (1000.0 * 1000.0)), 20, 100);
         } else if (!SPECTRUM) {
-            int[][] particleBuffer = new int[60][60];
-
-            int bufferWidth = particleBuffer[0].length;
-            int bufferHeight = particleBuffer.length;
-
-            BufferedImage image = new BufferedImage(bufferWidth, bufferHeight, BufferedImage.TYPE_INT_ARGB);
-
-            image.createGraphics();
-
-            Graphics k = image.getGraphics();
-
             for (Particle particle : simulation.particles) {
                 if (!particle.active) continue;
 
                 int closestDistance = 30 - Math.max(15, (int) (particle.closestDistance));
 
-                if (sprites[particle.group] != null && SPRITES && (particle.group != 2 || !EXPERIMENTAL_LIQUIDS)) {
+                if (sprites[particle.group] != null && SPRITES) {
                     if (particle.group == 4) {
                         g.drawImage(sprites[particle.group], (int) (particle.pos.x), (int) (particle.pos.y), 10, 10, null);
                     } else {
                         g.drawImage(sprites[particle.group], (int) (particle.pos.x - closestDistance * 2), (int) (particle.pos.y - closestDistance * 2),
                                 closestDistance * 4, closestDistance * 4, null);
                     }
-                } else if (EXPERIMENTAL_LIQUIDS) {
-                    int xCoord = Math.max(0, Math.min(bufferWidth - 1, ((int) particle.pos.x) >> 4));
-                    int yCoord = Math.max(0, Math.min(bufferHeight - 1, ((int) particle.pos.y) >> 4));
+                } else {
+                    if (particle.group == 1) g.setColor(Color.RED);
+                    if (particle.group == 2) g.setColor(Color.BLUE);
+                    if (particle.group == 3) g.setColor(Color.GREEN);
 
-                    particleBuffer[yCoord][xCoord]++;
+                    int r = g.getColor().getRed();
+                    int gr = g.getColor().getGreen();
+                    int b = g.getColor().getBlue();
 
-                    g.setColor(Color.BLUE);
-                }
-            }
+                    r = (int) Math.max(0, Math.min(255, r - particle.pos.y / 5));
+                    gr = (int) Math.max(0, Math.min(255, gr - particle.pos.y / 5));
+                    b = (int) Math.max(0, Math.min(255, r - particle.pos.y / 5));
 
-            for (int i = 0; i < bufferWidth; i++) {
-                int encounters = 0;
+                    g.fillOval((int) particle.pos.x,
+                            (int) particle.pos.y,
+                            10, 10);
 
-                for (int j = 0; j < bufferHeight; j++) {
-                    if (particleBuffer[j][i] != 0) {
-                        if (encounters == 0) {
-                            k.setColor(Color.WHITE);
-                        } else {
-                            k.setColor(new Color(0, Math.max(0, 128 - encounters * 10), Math.max(0, 255 - encounters * 20)));
-                        }
-
-                        encounters++;
-
-                        k.fillRect(i, j, 1, 1);
+                    for (int k = -3; k < 0; k++) {
+                        g.fillOval((int) ((int) particle.pos.x + particle.vel.x * k * 2),
+                                (int) ((int) particle.pos.y + particle.vel.y * k * 2),
+                                10 + k * 2, 10 + k * 2);
                     }
+
+                    g.setColor(Color.BLACK);
+
+                    g.drawOval((int) particle.pos.x,
+                            (int) particle.pos.y,
+                            10, 10);
                 }
 
-            }
+                if (VECTORS) {
+                    g.setColor(Color.RED);
+                    g.setStroke(new BasicStroke(1));
 
-            double scaleRatio = 0.5;
-
-            BufferedImage result = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_ARGB);
-            BufferedImage result2 = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_ARGB);
-
-            AffineTransform transform = new AffineTransform();
-            AffineTransform transform2 = new AffineTransform();
-
-            transform2.scale(scaleRatio, scaleRatio);
-            transform.scale(1000.0 / bufferWidth / scaleRatio, 1000.0 / bufferWidth / scaleRatio);
-
-            AffineTransformOp transformOp = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
-            AffineTransformOp transformOp2 = new AffineTransformOp(transform2, AffineTransformOp.TYPE_BILINEAR);
-
-            transformOp2.filter(image, result2);
-
-            for (int i = 0; i < 500; i++) {
-                for (int j = 0; j < 500; j++) {
-                    Color c = new Color(result2.getRGB(i, j));
-
-                    int alpha = result2.getRGB(i, j);
-                    alpha = (alpha >> 24) & 0xff;
-
-                    if (alpha > 0) {
-                        if (c.getRed() < 128) {
-                            c = new Color(c.getRed(), c.getGreen(), Math.max(0, Math.min(255, 255 - j * 5)), 255);
-                        }
-
-                        result2.setRGB(i, j, c.getRGB());
-                    }
+                    g.drawLine((int) particle.pos.x, (int) particle.pos.y,
+                            (int) (particle.pos.x + particle.vel.x * 3), (int) (particle.pos.y + particle.vel.y * 3));
                 }
             }
-
-            transformOp.filter(result2, result);
-
-            g.drawImage(result, 0, 0, 1000, 1000, null);
         } else {
             for (Particle particle : simulation.particles) {
                 if (!particle.active) continue;
 
-                if (particle.group != 2) {
-                    int closestDistance = 30 - Math.max(15, (int) (particle.closestDistance));
+                int closestDistance = 30 - Math.max(15, (int) (particle.closestDistance));
 
-                    double br = (particle.vel.length() / 20.0);
-                    br = Math.max(0, Math.min(1, br));
+                double br = (particle.vel.length() / 20.0);
+                br = Math.max(0, Math.min(1, br));
 
-                    Color c = Color.getHSBColor((float) br, 1.0f, 1.0f);
+                Color c = Color.getHSBColor((float) br, 1.0f, 1.0f);
 
-                    g.setColor(new Color(c.getRed(), c.getGreen(), c.getBlue()));
+                g.setColor(new Color(c.getRed(), c.getGreen(), c.getBlue()));
 
-                    g.fillOval((int) particle.pos.x - closestDistance,
-                            (int) particle.pos.y - closestDistance,
-                            closestDistance * 2, closestDistance * 2);
+                g.fillOval((int) particle.pos.x - closestDistance,
+                        (int) particle.pos.y - closestDistance,
+                        closestDistance * 2, closestDistance * 2);
 
-                    if (VECTORS) {
-                        g.drawLine((int) particle.pos.x, (int) particle.pos.y,
-                                (int) (particle.pos.x + particle.vel.x * 3), (int) (particle.pos.y + particle.vel.y * 3));
-                    }
+                if (VECTORS) {
+                    g.drawLine((int) particle.pos.x, (int) particle.pos.y,
+                            (int) (particle.pos.x + particle.vel.x * 3), (int) (particle.pos.y + particle.vel.y * 3));
                 }
             }
         }

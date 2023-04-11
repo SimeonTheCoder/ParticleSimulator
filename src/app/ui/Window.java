@@ -35,7 +35,6 @@ public class Window extends JPanel implements AppWindow {
     public boolean VECTORS;
     public boolean SPECTRUM;
     public boolean SPRITES;
-    public boolean EXPERIMENTAL_LIQUIDS;
 
     public int currentBackground = 0;
     public int backgroundCount = 4;
@@ -69,13 +68,9 @@ public class Window extends JPanel implements AppWindow {
 
         PAUSED = false;
         THREADED = true;
-
         ERASER = true;
-
         PRESSURE = false;
-
         SPRITES = true;
-        EXPERIMENTAL_LIQUIDS = false;
 
         backgroundCount = new File("ParticleSimulation/config/backgrounds").listFiles().length;
 
@@ -148,7 +143,7 @@ public class Window extends JPanel implements AppWindow {
             }
         }
 
-        renderer.render((Graphics2D) g, simulation, PRESSURE, VECTORS, SPECTRUM, SPRITES, EXPERIMENTAL_LIQUIDS);
+        renderer.render((Graphics2D) g, simulation, PRESSURE, VECTORS, SPECTRUM, SPRITES);
 
         g.setColor(new Color(250, 180, 26));
         g.fillRect((int) selector.x, (int) selector.y, 10, 10);
