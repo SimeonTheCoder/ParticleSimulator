@@ -41,13 +41,11 @@ public class CFGPropertyReader {
             String line = scanner.nextLine();
 
             if (line.startsWith(syntax[desired])) {
-                double propertyValue = Double.parseDouble(line.split(" = ")[1]);
-
-                return propertyValue;
+                return Double.parseDouble(line.split(" = ")[1]);
             }
         }
 
-        return -1;
+        return 0;
     }
 
     public static String readString(File file, String[] syntax, int desired) {

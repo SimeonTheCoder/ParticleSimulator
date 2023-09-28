@@ -57,6 +57,11 @@ public class Actions implements ActionListener {
                 break;
             }
 
+            case CANCEL_WINDOW: {
+                window.setVisible(false);
+                break;
+            }
+
             case POPUP_SUBMIT: {
                 window.setVisible(false);
 
@@ -66,7 +71,7 @@ public class Actions implements ActionListener {
             }
 
             case SIMULATION_SAVE: {
-                PopUp popUp = new PopUp(LANGTranslate.translate("File name"), (Ui) window);
+                PopUp popUp = new PopUp(LANGTranslate.translate("File name"), (Ui) window, "Save");
 
                 popUp.setActionCode(ActionCode.SIMULATION_SAVE);
                 popUp.frame.setSize(500, 100);
@@ -75,7 +80,7 @@ public class Actions implements ActionListener {
             }
 
             case SIMULATION_LOAD: {
-                PopUp popUp = new PopUp(LANGTranslate.translate("File name"), (Ui) window);
+                PopUp popUp = new PopUp(LANGTranslate.translate("File name"), (Ui) window, "Load");
 
                 popUp.setActionCode(ActionCode.SIMULATION_LOAD);
                 popUp.frame.setSize(500, 100);
@@ -101,29 +106,29 @@ public class Actions implements ActionListener {
                 break;
             }
 
-            case PRESET_SOLID: {
-                ((BrushCreation) window).config(100, 3, 50, 1, 10, true, false, false, 1, 1);
-
-                break;
-            }
-
-            case PRESET_LIQUID: {
-                ((BrushCreation) window).config(100, 0.2, 50, 1, 3, true, false, false, 2, 1);
-
-                break;
-            }
-
-            case PRESET_GAS: {
-                ((BrushCreation) window).config(100, 0.1, 50, 10, 0.1, true, false, false, 3, 1);
-
-                break;
-            }
-
-            case PRESET_WALL: {
-                ((BrushCreation) window).config(0, 0.1, 30, 10, 10000, false, false, false, 4, 1);
-
-                break;
-            }
+//            case PRESET_SOLID: {
+//                ((BrushCreation) window).config(100, 3, 50, 1, 10, true, false, false, 1, 1);
+//
+//                break;
+//            }
+//
+//            case PRESET_LIQUID: {
+//                ((BrushCreation) window).config(100, 0.2, 50, 1, 3, true, false, false, 2, 1);
+//
+//                break;
+//            }
+//
+//            case PRESET_GAS: {
+//                ((BrushCreation) window).config(100, 0.1, 50, 10, 0.1, true, false, false, 3, 1);
+//
+//                break;
+//            }
+//
+//            case PRESET_WALL: {
+//                ((BrushCreation) window).config(0, 0.1, 30, 10, 10000, false, false, false, 4, 1);
+//
+//                break;
+//            }
 
             case PRESET_USED: {
                 ((BrushCreation) window).parseFromFile(param);

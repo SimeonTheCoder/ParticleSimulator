@@ -20,5 +20,6 @@ brush.create.part = Преграда
 brush.create.mov = Подвижна
 brush.create.mass = Маса
 brush.create.group = Група
-brush.create.count = Брой частици
+brush.create.count = Брой
 brush.create.create =  - Създайте четка -
+brush.create.initvel = Скорост

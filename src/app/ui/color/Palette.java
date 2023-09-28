@@ -8,6 +8,8 @@ import java.io.File;
 public class Palette {
     public static Color primaryColor;
     public static Color secondaryColor;
+    public static Color thirdColor;
+    public static Color forthColor;
 
     private static final String PATH_THEME_FOLDER = "ParticleSimulation/config/themes/";
 
@@ -43,6 +45,16 @@ public class Palette {
 
         secondaryColor = new Color(secR, secG, secB);
 
-        System.out.printf("%d %d %d, %d %d %d", primR, primG, primB, secR, secG, secB);
+        thirdColor = new Color(
+                Math.max(0, Math.min(255, secR + 32)),
+                Math.max(0, Math.min(255, secG + 32)),
+                Math.max(0, Math.min(255, secB + 32))
+        );
+
+        forthColor = new Color(
+                Math.max(0, Math.min(255, secR + 64)),
+                Math.max(0, Math.min(255, secG + 64)),
+                Math.max(0, Math.min(255, secB + 64))
+        );
     }
 }

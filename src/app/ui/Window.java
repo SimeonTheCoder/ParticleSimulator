@@ -46,6 +46,8 @@ public class Window extends JPanel implements AppWindow {
     public Window(String title, int xSize, int ySize, Renderer renderer) {
         frame = new JFrame(title);
 
+        frame.setUndecorated(true);
+
         frame.setSize(xSize, ySize);
 //        frame.setUndecorated(true);
 

@@ -27,7 +27,9 @@ public class BrushCreation implements AppWindow {
             "partition",
             "movable",
             "group",
-            "count"
+            "count",
+            "velX",
+            "velY"
     };
 
     public JFrame frame;
@@ -37,6 +39,10 @@ public class BrushCreation implements AppWindow {
     private JTextField attForce;
     private JTextField repRadius;
     private JTextField repForce;
+
+    private JTextField initialVelX;
+    private JTextField initialVelY;
+
     private JTextField mass;
     private JTextField group;
 
@@ -52,7 +58,7 @@ public class BrushCreation implements AppWindow {
         frame = new JFrame();
 
         frame.setTitle("SEPience");
-        frame.setSize(200, 500);
+        frame.setSize(200, 450);
 
         frame.setLocation(600, 300);
 
@@ -64,58 +70,80 @@ public class BrushCreation implements AppWindow {
         attRadius = new JTextField(10);
         attractionLabelRadius.setForeground(Palette.primaryColor);
         attRadius.setForeground(Palette.primaryColor);
-        attRadius.setBackground(Palette.secondaryColor);
+        attRadius.setBackground(Palette.thirdColor);
 
         JLabel attractionLabelStrength = new JLabel(LANGTranslate.translate("Attraction strength"));
         attForce = new JTextField(10);
         attractionLabelStrength.setForeground(Palette.primaryColor);
         attForce.setForeground(Palette.primaryColor);
-        attForce.setBackground(Palette.secondaryColor);
+        attForce.setBackground(Palette.thirdColor);
 
         JLabel repulsionLabelRadius = new JLabel(LANGTranslate.translate("Repulsion radius"));
         repRadius = new JTextField(10);
         repulsionLabelRadius.setForeground(Palette.primaryColor);
         repRadius.setForeground(Palette.primaryColor);
-        repRadius.setBackground(Palette.secondaryColor);
+        repRadius.setBackground(Palette.thirdColor);
 
         JLabel repulsionLabelStrength = new JLabel(LANGTranslate.translate("Repulsion strength"));
         repForce = new JTextField(10);
         repulsionLabelStrength.setForeground(Palette.primaryColor);
         repForce.setForeground(Palette.primaryColor);
-        repForce.setBackground(Palette.secondaryColor);
+        repForce.setBackground(Palette.thirdColor);
 
         JLabel gravityLabel = new JLabel(LANGTranslate.translate("Gravity"));
         gravity = new JCheckBox();
         gravityLabel.setForeground(Palette.primaryColor);
         gravityLabel.setBackground(Palette.secondaryColor);
 
+        JLabel initialVelocityLabel = new JLabel(LANGTranslate.translate("Initial velocity"));
+        initialVelX = new JTextField(4);
+        initialVelY = new JTextField(4);
+        initialVelocityLabel.setForeground(Palette.primaryColor);
+        initialVelX.setForeground(Palette.primaryColor);
+        initialVelX.setBackground(Palette.thirdColor);
+        initialVelY.setForeground(Palette.primaryColor);
+        initialVelY.setBackground(Palette.thirdColor);
+
         JLabel partitionLabel = new JLabel(LANGTranslate.translate("Partition"));
         partitionLabel.setForeground(Palette.primaryColor);
-        partitionLabel.setBackground(Palette.secondaryColor);
+        partitionLabel.setBackground(Palette.thirdColor);
         partition = new JCheckBox();
 
         JLabel movableLabel = new JLabel(LANGTranslate.translate("Movable"));
         movableLabel.setForeground(Palette.primaryColor);
-        movableLabel.setBackground(Palette.secondaryColor);
+        movableLabel.setBackground(Palette.thirdColor);
         movable = new JCheckBox();
 
         JLabel massLabel = new JLabel(LANGTranslate.translate("Mass"));
         mass = new JTextField(10);
         massLabel.setForeground(Palette.primaryColor);
         mass.setForeground(Palette.primaryColor);
-        mass.setBackground(Palette.secondaryColor);
+        mass.setBackground(Palette.thirdColor);
 
         JLabel groupLabel = new JLabel(LANGTranslate.translate("Group"));
         group = new JTextField(10);
         groupLabel.setForeground(Palette.primaryColor);
         group.setForeground(Palette.primaryColor);
-        group.setBackground(Palette.secondaryColor);
+        group.setBackground(Palette.thirdColor);
 
         JLabel countLabel = new JLabel(LANGTranslate.translate("Count"));
         count = new JTextField(10);
         countLabel.setForeground(Palette.primaryColor);
         count.setForeground(Palette.primaryColor);
-        count.setBackground(Palette.secondaryColor);
+        count.setBackground(Palette.thirdColor);
+
+        JSeparator separator = new JSeparator(SwingConstants.HORIZONTAL);
+        JSeparator separator2 = new JSeparator(SwingConstants.HORIZONTAL);
+        JSeparator separator3 = new JSeparator(SwingConstants.HORIZONTAL);
+        JSeparator separator4 = new JSeparator(SwingConstants.HORIZONTAL);
+
+        Dimension d = separator.getPreferredSize();
+        d.width = 160;
+
+        separator.setPreferredSize(d);
+        separator2.setPreferredSize(d);
+        separator3.setPreferredSize(d);
+        separator4.setPreferredSize(d);
 
         panel.add(attractionLabelRadius);
         panel.add(attRadius);
@@ -129,14 +157,24 @@ public class BrushCreation implements AppWindow {
         panel.add(repulsionLabelStrength);
         panel.add(repForce);
 
+        panel.add(separator);
+
         panel.add(gravityLabel);
         panel.add(gravity);
 
-        panel.add(partitionLabel);
-        panel.add(partition);
+        panel.add(separator2);
 
-        panel.add(movableLabel);
-        panel.add(movable);
+        panel.add(initialVelocityLabel);
+        panel.add(initialVelX);
+        panel.add(initialVelY);
+
+        panel.add(separator3);
+
+//        panel.add(partitionLabel);
+//        panel.add(partition);
+
+//        panel.add(movableLabel);
+//        panel.add(movable);
 
         panel.add(massLabel);
         panel.add(mass);
@@ -147,13 +185,7 @@ public class BrushCreation implements AppWindow {
         panel.add(countLabel);
         panel.add(count);
 
-        JSeparator separator = new JSeparator(SwingConstants.HORIZONTAL);
-
-        Dimension d = separator.getPreferredSize();
-        d.width = 140;
-
-        separator.setPreferredSize(d);
-        panel.add(separator);
+        panel.add(separator4);
 
         int fileCount = new File("ParticleSimulation/config/brushes").listFiles().length;
 
@@ -192,7 +224,14 @@ public class BrushCreation implements AppWindow {
 
         panel.add(createBrush);
 
+        JButton cancelButton = new JButton("Cancel");
+        cancelButton.addActionListener(new Actions(ActionCode.CANCEL_WINDOW, this));
+
+        panel.add(cancelButton);
+
         frame.add(panel);
+
+        frame.setUndecorated(true);
 
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
@@ -215,14 +254,16 @@ public class BrushCreation implements AppWindow {
                 Double.parseDouble(mass.getText()),
                 1,
                 Integer.parseInt(group.getText()),
-                Integer.parseInt(count.getText())
+                Integer.parseInt(count.getText()),
+                Double.parseDouble(initialVelX.getText()),
+                Double.parseDouble(initialVelY.getText())
         );
 
         return brush;
     }
 
     public void config(double attRadius, double attForce, double repRadius, double repForce, double mass, boolean grav,
-                       boolean part, boolean mov, int group, int count) {
+                       boolean part, boolean mov, int group, int count, double initVelX, double initVelY) {
         this.attRadius.setText(String.valueOf(attRadius));
         this.attForce.setText(String.valueOf(attForce));
 
@@ -239,6 +280,9 @@ public class BrushCreation implements AppWindow {
         this.movable.setSelected(mov);
 
         this.count.setText(String.valueOf(count));
+
+        this.initialVelX.setText(String.valueOf(initVelX));
+        this.initialVelY.setText(String.valueOf(initVelY));
     }
 
     public void parseFromFile(int index) {
@@ -267,7 +311,21 @@ public class BrushCreation implements AppWindow {
             int group = CFGPropertyReader.readInt(file, syntax, 8);
             int count = CFGPropertyReader.readInt(file, syntax, 9);
 
-            config(attForceRad, attForceVal, repForceRad, repForceVal, mass, grav, part, mov, group, count);
+            double velX;
+            try {
+                velX = CFGPropertyReader.readDouble(file, syntax, 10);
+            } catch (Exception exception) {
+                velX = 0;
+            }
+
+            double velY;
+            try {
+                velY = CFGPropertyReader.readDouble(file, syntax, 11);
+            } catch (Exception exception) {
+                velY = 0;
+            }
+
+            config(attForceRad, attForceVal, repForceRad, repForceVal, mass, grav, part, mov, group, count, velX, velY);
         }
     }
 }

@@ -31,7 +31,7 @@ public class Particle {
         this.pos = pos;
         this.vel = vel;
         this.mass = mass;
-        this.speedCap = 5;
+        this.speedCap = 50;
 
         this.active = true;
 

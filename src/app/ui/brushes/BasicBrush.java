@@ -8,7 +8,7 @@ public class BasicBrush implements Brush {
     private int count;
 
     @Override
-    public void build(Vec2 att, Vec2 rep, boolean grav, boolean partition, boolean movable, double mass, double fric, int group, int count) {
+    public void build(Vec2 att, Vec2 rep, boolean grav, boolean partition, boolean movable, double mass, double fric, int group, int count, double initVelX, double initVelY) {
         Particle particle = new Particle();
 
         particle.att = att;
@@ -21,7 +21,7 @@ public class BasicBrush implements Brush {
         particle.movable = movable;
 
         particle.pos = new Vec2(0, 0);
-        particle.vel = new Vec2(0, 0);
+        particle.vel = new Vec2(initVelX, initVelY);
 
         particle.active = true;
         particle.speedCap = 5;
@@ -32,21 +32,13 @@ public class BasicBrush implements Brush {
     }
 
     @Override
-    public Particle action(Vec2 pos, Vec2 vel) {
-        return instance.clone().setPos(pos).setVel(vel);
+    public Particle action(Vec2 pos) {
+        return instance.clone().setPos(pos);
     }
 
     @Override
     public int getGroup() {
         return instance.group;
-    }
-
-    public Particle getInstance() {
-        return instance;
-    }
-
-    public void setInstance(Particle instance) {
-        this.instance = instance;
     }
 
     public int getCount() {

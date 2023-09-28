@@ -8,7 +8,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
 
 public class Renderer {
     public int[][] values;
@@ -109,34 +108,34 @@ public class Renderer {
                     if (particle.group == 2) g.setColor(Color.BLUE);
                     if (particle.group == 3) g.setColor(Color.GREEN);
 
-                    int r = g.getColor().getRed();
-                    int gr = g.getColor().getGreen();
-                    int b = g.getColor().getBlue();
-
-                    r = (int) Math.max(0, Math.min(255, r - particle.pos.y / 5));
-                    gr = (int) Math.max(0, Math.min(255, gr - particle.pos.y / 5));
-                    b = (int) Math.max(0, Math.min(255, r - particle.pos.y / 5));
+//                    int r = g.getColor().getRed();
+//                    int gr = g.getColor().getGreen();
+//                    int b = g.getColor().getBlue();
+//
+//                    r = (int) Math.max(0, Math.min(255, r - particle.pos.y / 5));
+//                    gr = (int) Math.max(0, Math.min(255, gr - particle.pos.y / 5));
+//                    b = (int) Math.max(0, Math.min(255, r - particle.pos.y / 5));
 
                     g.fillOval((int) particle.pos.x,
                             (int) particle.pos.y,
                             10, 10);
 
-                    for (int k = -3; k < 0; k++) {
+                    for (int k = 0; k < 1; k++) {
                         g.fillOval((int) ((int) particle.pos.x + particle.vel.x * k * 2),
                                 (int) ((int) particle.pos.y + particle.vel.y * k * 2),
                                 10 + k * 2, 10 + k * 2);
                     }
 
-                    g.setColor(Color.BLACK);
-
-                    g.drawOval((int) particle.pos.x,
-                            (int) particle.pos.y,
-                            10, 10);
+//                    g.setColor(Color.BLACK);
+//
+//                    g.drawOval((int) particle.pos.x,
+//                            (int) particle.pos.y,
+//                            10, 10);
                 }
 
                 if (VECTORS) {
                     g.setColor(Color.RED);
-                    g.setStroke(new BasicStroke(1));
+//                    g.setStroke(new BasicStroke(1));
 
                     g.drawLine((int) particle.pos.x, (int) particle.pos.y,
                             (int) (particle.pos.x + particle.vel.x * 3), (int) (particle.pos.y + particle.vel.y * 3));

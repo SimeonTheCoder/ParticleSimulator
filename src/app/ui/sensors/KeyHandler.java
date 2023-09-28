@@ -217,14 +217,14 @@ public class KeyHandler {
                 if (window.brush.getGroup() != 4) {
                     for (int i = 0; i < window.brush.getCount(); i++) {
                         window.simulation.particles.add(
-                                window.brush.action(new Vec2(window.selector.x, window.selector.y), new Vec2(0, 0))
+                                window.brush.action(new Vec2(window.selector.x, window.selector.y))
                         );
                     }
                 } else {
                     for (int i = -10; i < 10; i += 10) {
                         for (int j = -10; j < 10; j += 10) {
                             window.simulation.particles.add(
-                                    window.brush.action(new Vec2(window.selector.x + i, window.selector.y + j), new Vec2(0, 0))
+                                    window.brush.action(new Vec2(window.selector.x + i, window.selector.y + j))
                             );
                         }
                     }
